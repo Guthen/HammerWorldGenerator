@@ -1,0 +1,10 @@
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.exe.config
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.exe
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.pdb
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csprojAssemblyReference.cache
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Form1.resources
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Properties.Resources.resources
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.GenerateResource.cache
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.CoreCompileInputs.cache
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe
+C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.pdb
