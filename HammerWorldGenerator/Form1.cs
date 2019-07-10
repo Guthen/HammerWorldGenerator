@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HammerWorldGenerator
 {
-    public partial class Form1 : Form
+    public partial class Frame : Form
     {
-        public Form1()
+        public Frame()
         {
             InitializeComponent();
         }
@@ -23,6 +23,31 @@ namespace HammerWorldGenerator
         }
 
         private void ButCompile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CkBoxChunkFill_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NumericUpDownBlockHeight_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NumericUpDownBlockWidth_ValueChanged(object sender, EventArgs e)
         {
 
         }

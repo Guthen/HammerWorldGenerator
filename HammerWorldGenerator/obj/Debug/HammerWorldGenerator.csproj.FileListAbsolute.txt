@@ -8,3 +8,13 @@ C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\
 C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.CoreCompileInputs.cache
 C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe
 C:\Users\arthu\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.pdb
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.exe.config
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.exe
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.pdb
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csprojAssemblyReference.cache
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Frame.resources
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Properties.Resources.resources
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.GenerateResource.cache
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.CoreCompileInputs.cache
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.pdb
