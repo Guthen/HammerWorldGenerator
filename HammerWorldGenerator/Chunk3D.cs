@@ -24,7 +24,7 @@
 */
 using System;
 
-public class Chunk2D
+public class Chunk3D
 {
 
     static int seed = 0;
