@@ -30,12 +30,12 @@ public static class Chunk3D
     
     static int seed = 0;
     static int cellSize = 8;
-    static int chunkW = 600;
-    static int chunkH = 800;
+    static int chunkW = 64;
+    static int chunkH = 64;
     static int surfaceY = 30;
     static int minSurfaceY = chunkH / cellSize - 15;
     static int maxSurfaceY = 5;
-    static int[] fillIDs = { 1, 2 };
+    static int[] fillIDs = new int[128];
     
     static bool fill = true;
 
@@ -103,6 +103,15 @@ public static class Chunk3D
 
         maxSurfaceY = _maxY;
 
+        for (int i = 0; i < 128; i++)
+        {
+            var id = 3;
+            if (i <= 1) id = 1;
+            if (i < 3) id = 2;
+            if (i == chunkH-1) id = 4;
+            fillIDs[i] = id;
+        }
+
         if ( _seed >= 0 ) {
             random = new Random(seed);
         }
@@ -137,16 +146,16 @@ public static class Chunk3D
 
     //  > Get SurfaceY Position of the '_chunk' by given '_x' 
     public static int getSurfaceY( int[][] _chunk, int _x ) {
-        if (_x < 0) return -1;
+        if ( _x < 0 ) return -1;
 
-        for ( int y = 0; y < _chunk.Length; y++ ) {
-            for ( int x = 0; x < _chunk[0].Length; y++ ) {
-                if ( _x == x ) {
-                    if ( chunkIsInRange( _chunk, y ) && isInRange( _chunk[y], x ) && _chunk[y][x] > 0 ) return y;
+        for ( int x = 0; x < _chunk[0].Length; x++ ) {
+            if ( _x == x ) {
+                for ( int y = 0; y < _chunk.Length; y++ )
+                {
+                    //Console.WriteLine( " _x:" + _x + " x:" + x + " y:" + y + "| v:" + _chunk[y][x] );
+                    if ( _chunk[y][x] > 0 ) return y;
                 }
-                x++;
             }
-            y++;
         }
 
         return -1;
@@ -155,59 +164,70 @@ public static class Chunk3D
     //  > Fill the chunk
     public static void fillChunk( ref int[][] _chunk ) {
         if (!fill) return;
-        for (int x = 0; x < chunkW; x++)
+        for ( int x = 0; x < chunkW; x++ )
         {
-            var y = getSurfaceY(_chunk, x);
-
-            if ( y > 0 )
+            var _y = getSurfaceY(_chunk, x);
+            if (_y > -1)
             {
                 var b = 0;
                 var surface = fillIDs[1];
-                for ( int _y = y + 1; y < chunkH; _y++ )
+                for (int y = _y - 1; y > 0; y--)
                 {
-                    _chunk[_y][x] = surface;
-                    b = b + 1;
-                    if ( isInRange(fillIDs, b) && b > 0 && fillIDs[b] > 0 )
+                    if (!chunkIsInRange(_chunk, y)) continue;
+                    if (!isInRange(_chunk[y], x)) continue;
+                    _chunk[y][x] = surface;
+                   // Console.WriteLine(x + " " + y);
+                    b++;
+                    if (b  > 1 && isInRange( fillIDs, b ))
                     {
                         surface = fillIDs[b];
                     }
+                    if (y - 1 == 0)
+                    {
+                        surface = fillIDs[chunkH - 1];
+                    }
                 }
-
             }
         }
     }
 
     //  > Create & Generate a chunk by using the '_lastChunk'
-    public static void generateChunk( ref int[][] _chunk, ref int[][] _lastChunk ) { 
+    public static void generateChunk( ref int[][] _chunk, ref int[][] _lastChunk ) {
+        Console.WriteLine( "Generating Chunk" );
 
 	    for ( int x = 0; x < chunkW; x++ ) { // generate the surface
 
             var _y = -1;
-            if ( _lastChunk.Length > 0 && x == 1 ) {
-                _y = getSurfaceY(_lastChunk, chunkW);
+            if ( _lastChunk.Length > 0 && x == 0 ) {
+                _y = getSurfaceY(_lastChunk, chunkW-1);
+                Console.WriteLine("LastChunkY: " + _y);
             }
             else {
                 _y = getSurfaceY(_chunk, x - 1);
             }
 
 		    if ( _y > -1 ) {
-                int offset = random.Next(-1, 1); // get the Y offset
+                int offset = random.Next(-1, 2); // get the Y offset
+                //Console.WriteLine( "offset: " + offset );
                 if ( _chunk.Length <= _y + offset | _y + offset >= 0 && _chunk[_y + offset][x] > -1 ) { // if it's exists
-                    if (_y + offset < maxSurfaceY | _y + offset > minSurfaceY)
+                    if (_y + offset < maxSurfaceY | _y + offset > minSurfaceY )
                     {
-                        offset = 0;
+                        offset = -offset;
                     }
-                    _chunk[_y + offset][x] = fillIDs[1];
+                    if (chunkIsInRange(_chunk, _y + offset) && isInRange( _chunk[_y + offset], x ) )
+                    {
+                        _chunk[_y + offset][x] = fillIDs[0];
+                    }
                 }
             }
             else if ( _lastChunk.Length <= 0 ) {
-                _chunk[surfaceY][x] = fillIDs[1];
+                _chunk[surfaceY][x] = fillIDs[0];
             }
 
         }
 
         smoothChunk( ref _chunk, ref _lastChunk);
-        fillChunk( ref _chunk );
+        //fillChunk( ref _chunk );
     }
 
     //  > Create & Generate a world of 'nChunks' chunks
@@ -218,6 +238,10 @@ public static class Chunk3D
             var lastChunk = worldIsInRange( world, i - 1 ) ? world[i-1] : new int[0][];
 
             generateChunk( ref world[i], ref lastChunk );
+        }
+        for( int i = 0; i < nChunks; i++ )
+        {
+            fillChunk(ref world[i]);
         }
         return world;
     }
@@ -230,6 +254,7 @@ public static class Chunk3D
 
             var y = -1;
             var _y = -1;
+            var _yLast = false;
             var __y = -1;
             var ___y = -1;
             y = getSurfaceY(_chunk, x);
@@ -238,6 +263,7 @@ public static class Chunk3D
                 _y = getSurfaceY(_lastChunk, chunkW - 1);
 
                 activeChunk = _lastChunk;
+                _yLast = true;
             }
             else {
                 _y = getSurfaceY(_chunk, x - 1);
@@ -261,8 +287,8 @@ public static class Chunk3D
 
 		    if ( y > -1 && _y > -1 && __y > -1 ) {
                 if ( y == __y && (_y != y) && Math.Abs(y - _y) <= 1 && chunkIsInRange( activeChunk, y ) ) { // if : '0 - 1 - 0' or : '1 - 0 - 1'
-                    if (_y > -1 && y > -1 && _y < y) { activeChunk[_y][x - 1] = 0; }
-
+                    //if (_y > -1 && y > -1 && _y < y) { activeChunk[_y][x - 1] = 0; }
+                    activeChunk[_y][x - 1] = 0;
                     activeChunk[y][x - 1] = 1;
                 }
                 else if ( y == ___y && _y == __y && y != _y ) {
@@ -270,8 +296,21 @@ public static class Chunk3D
 
                     activeChunk[y][x - 2] = 2;
                 }
-
+            } else
+            {
+                if (_y == -1)
+                {
+                    if ( _yLast )
+                    {
+                        _lastChunk[y][chunkW - 1] = 1;
+                    }
+                    else if ( chunkIsInRange( activeChunk, y ) && isInRange( activeChunk[y], x -1 ) )
+                    {
+                        activeChunk[y][x - 1] = 1;
+                    }
+                }
             }
+
 
         }
     }

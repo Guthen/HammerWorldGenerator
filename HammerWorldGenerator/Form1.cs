@@ -16,6 +16,8 @@ namespace HammerWorldGenerator
         int entityid = 0;
         int solidid = 0;
         int planeid = 0;
+        float TailleTexture;
+
         string save;
         string bloc;
         string materialtop = "MC/BEDROCK";
@@ -24,24 +26,31 @@ namespace HammerWorldGenerator
         string materialbehind = "MC/BEDROCK";
         string materialfront = "MC/BEDROCK";
         string materialunder = "MC/BEDROCK";
-        decimal TailleTexture;
 
         public Frame()
         {
             InitializeComponent();
+            nUDownSeed.Value = DateTime.Now.Millisecond;
+
+            // load file path
+            if ( File.Exists( "preferences.txt" ) ) {
+                StreamReader sr = new StreamReader("preferences.txt");
+                        tBoxOutputPath.Text = sr.ReadLine();
+                        sr.Close();
+            }
         }
         
         private void butGenerate_Click(object sender, EventArgs e)
         {
             // generation
-            var world = GenerateWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 5, Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 5 );
+            var world = GenerateWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), Convert.ToInt32( nUDownChunks.Value ), Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 3 );
             entityid = 0;
             solidid = 0;
             planeid = 0;
 
             string bloctype;
             bool breakable = ckBoxFullBreakable.Checked;
-            OutputTextBox.Clear();
+
             save = "versioninfo\r\n{\r\n\t\"editorversion\" \"400\"\r\n\t\"editorbuild\" \"8261\"\r\n\t\"mapversion\" \"19\"\r\n\t\"formatversion\" \"100\"\r\n\t\"prefab\" \"0\"\r\n}\r\nvisgroups\r\n{\r\n}\r\nviewsettings\r\n{\r\n\t\"bSnapToGrid\" \"1\"\r\n\t\"bShowGrid\" \"1\"\r\n\t\"bShowLogicalGrid\" \"0\"\r\n\t\"nGridSpacing\" \"8\"\r\n\t\"bShow3DGrid\" \"0\"\r\n}\r\nworld\r\n{\r\n\t\"id\" \"1\"\r\n\t\"mapversion\" \"19\"\r\n\t\"classname\" \"worldspawn\"\r\n\t\"detailmaterial\" \"detail/detailsprites\"\r\n\t\"detailvbsp\" \"detail.vbsp\"\r\n\t\"maxpropscreenwidth\" \"-1\"\r\n\t\"skyname\" \"minecraft_sky_\"\r\n";
 
             if (breakable == true)
@@ -65,7 +74,8 @@ namespace HammerWorldGenerator
 
                         // get position & size
                         var s = numericUpDownBlockSize.Value;
-                        var position = new decimal[3] { x * s, 1, y * s };
+                        var chunkOff = c * Chunk3D.getChunkWidth() * Chunk3D.getCellSize();
+                        var position = new decimal[3] { x * s + chunkOff, 1, y * s };
                         var size = new decimal[3] { s, s, s };
 
                         switch(xv)
@@ -85,10 +95,6 @@ namespace HammerWorldGenerator
                         }
 
                         CreateBloc( bloctype, breakable, position, size );
-                        if (breakable == false)
-                        {
-                            save += "}\r\n";
-                        }
                     }
                     output = output + " },\n";
                 }
@@ -98,6 +104,11 @@ namespace HammerWorldGenerator
 
             OutputTextBox.Text = output;
 
+            if (breakable == false)
+            {
+                save += "}\r\n";
+            }
+            
             // get position & size
             //int[] position = new int[3] { 1, 1, 1 };
             //decimal[] size = new decimal[3] { numericUpDownBlockSize.Value, numericUpDownBlockSize.Value, numericUpDownBlockSize.Value };
@@ -124,12 +135,18 @@ namespace HammerWorldGenerator
             //}
             save += "cameras\r\n{\r\n\t\"activecamera\" \"-1\"\r\n}\r\ncordon\r\n{\t\"mins\" \"(-1024 -1024 -1024)\"\r\n\t\"maxs\" \"(1024 1024 1024)\"\r\n\t\"active\" \"0\"\r\n}\r\n";
 
-                StreamWriter sw = new StreamWriter(this.tBoxOutputPath.Text);
-                sw.Write(save);
-                sw.Close();
-                MessageBox.Show(this, "Succesfully generated the vmf file ! Saved in " + tBoxOutputPath.Text,
+            StreamWriter sw = new StreamWriter(tBoxOutputPath.Text);
+                        sw.Write(save);
+                        sw.Close();
+
+            MessageBox.Show(this, "Succesfully generated the vmf file ! Saved in " + tBoxOutputPath.Text,
                                       "Notification", MessageBoxButtons.OK,
                                       MessageBoxIcon.Information);
+
+            // save file path 
+            StreamWriter _sw = new StreamWriter("preferences.txt");
+                _sw.Write(tBoxOutputPath.Text);
+                _sw.Close();
         }
         
         private int[][][] GenerateWorld( int seed, int blockSize, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY ) {
@@ -329,7 +346,14 @@ namespace HammerWorldGenerator
                 materialfront = "MC/ICE";
                 materialunder = "MC/ICE";
             }
-            decimal TailleTexture = Decimal.Divide(numericUpDownBlockSize.Value, 128);
+            //TailleTexture = Decimal.Divide(128, numericUpDownBlockSize.Value);
+            TailleTexture = (float)numericUpDownBlockSize.Value / 128;
+            Console.WriteLine( "TT:" + TailleTexture );
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
