@@ -44,9 +44,9 @@
             this.nUDownChunkHeight = new System.Windows.Forms.NumericUpDown();
             this.lWidth = new System.Windows.Forms.Label();
             this.nUDownChunkWidth = new System.Windows.Forms.NumericUpDown();
-            this.tBoxChunkSeed = new System.Windows.Forms.TextBox();
             this.butGenerate = new System.Windows.Forms.Button();
             this.gBoxOutput = new System.Windows.Forms.GroupBox();
+            this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
             this.gBoxOptions.SuspendLayout();
             this.gBoxMinecraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).BeginInit();
@@ -54,16 +54,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).BeginInit();
             this.gBoxOutput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).BeginInit();
             this.SuspendLayout();
             // 
             // gBoxOptions
             // 
+            this.gBoxOptions.Controls.Add(this.nUDownSeed);
             this.gBoxOptions.Controls.Add(this.lOutputPath);
             this.gBoxOptions.Controls.Add(this.tBoxOutputPath);
             this.gBoxOptions.Controls.Add(this.gBoxMinecraft);
             this.gBoxOptions.Controls.Add(this.lSeed);
             this.gBoxOptions.Controls.Add(this.gBoxChunk);
-            this.gBoxOptions.Controls.Add(this.tBoxChunkSeed);
             this.gBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.gBoxOptions.Name = "gBoxOptions";
             this.gBoxOptions.Size = new System.Drawing.Size(472, 320);
@@ -189,9 +190,24 @@
             // nUDownChunkHeight
             // 
             this.nUDownChunkHeight.Location = new System.Drawing.Point(53, 45);
+            this.nUDownChunkHeight.Maximum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.nUDownChunkHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nUDownChunkHeight.Name = "nUDownChunkHeight";
             this.nUDownChunkHeight.Size = new System.Drawing.Size(68, 20);
             this.nUDownChunkHeight.TabIndex = 2;
+            this.nUDownChunkHeight.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
             // 
             // lWidth
             // 
@@ -205,16 +221,24 @@
             // nUDownChunkWidth
             // 
             this.nUDownChunkWidth.Location = new System.Drawing.Point(53, 19);
+            this.nUDownChunkWidth.Maximum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.nUDownChunkWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nUDownChunkWidth.Name = "nUDownChunkWidth";
             this.nUDownChunkWidth.Size = new System.Drawing.Size(68, 20);
             this.nUDownChunkWidth.TabIndex = 0;
-            // 
-            // tBoxChunkSeed
-            // 
-            this.tBoxChunkSeed.Location = new System.Drawing.Point(57, 19);
-            this.tBoxChunkSeed.Name = "tBoxChunkSeed";
-            this.tBoxChunkSeed.Size = new System.Drawing.Size(259, 20);
-            this.tBoxChunkSeed.TabIndex = 5;
+            this.nUDownChunkWidth.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
             // 
             // butGenerate
             // 
@@ -235,6 +259,13 @@
             this.gBoxOutput.TabIndex = 1;
             this.gBoxOutput.TabStop = false;
             this.gBoxOutput.Text = "Generator Output";
+            // 
+            // nUDownSeed
+            // 
+            this.nUDownSeed.Location = new System.Drawing.Point(57, 20);
+            this.nUDownSeed.Name = "nUDownSeed";
+            this.nUDownSeed.Size = new System.Drawing.Size(259, 20);
+            this.nUDownSeed.TabIndex = 5;
             // 
             // Frame
             // 
@@ -259,6 +290,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).EndInit();
             this.gBoxOutput.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,7 +307,6 @@
         private System.Windows.Forms.Label lWidth;
         private System.Windows.Forms.NumericUpDown nUDownChunkWidth;
         private System.Windows.Forms.Label lSeed;
-        private System.Windows.Forms.TextBox tBoxChunkSeed;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownBlockSize;
         private System.Windows.Forms.GroupBox gBoxMinecraft;
@@ -283,6 +314,7 @@
         private System.Windows.Forms.Label lOutputPath;
         private System.Windows.Forms.TextBox tBoxOutputPath;
         private System.Windows.Forms.CheckBox ckBoxFullBreakable;
+        private System.Windows.Forms.NumericUpDown nUDownSeed;
     }
 }
 

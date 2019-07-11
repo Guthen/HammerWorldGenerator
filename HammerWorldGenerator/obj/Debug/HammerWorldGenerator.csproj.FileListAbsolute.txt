@@ -33,3 +33,8 @@ C:\Users\COUPART\Source\Repos\HammerWorldGenerator\HammerWorldGenerator\bin\Debu
 C:\Users\COUPART\Source\Repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.TrustInfo.xml
 C:\Users\COUPART\Source\Repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe.manifest
 C:\Users\COUPART\Source\Repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.application
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.exe.manifest
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\bin\Debug\HammerWorldGenerator.application
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.TrustInfo.xml
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe.manifest
+C:\Users\arthu\Documents\GitHub\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.application

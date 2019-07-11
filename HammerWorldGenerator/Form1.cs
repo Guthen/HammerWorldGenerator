@@ -33,6 +33,8 @@ namespace HammerWorldGenerator
         
         private void butGenerate_Click(object sender, EventArgs e)
         {
+            GenerateWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 5, Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 5 );
+
             entityid = 0;
             solidid = 0;
             planeid = 0;
@@ -71,15 +73,17 @@ namespace HammerWorldGenerator
                                     MessageBoxIcon.Information);
         }
         
-        private int GenerateWorld( int seed, int blockSize, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY ) {
-            Chunk3D chunk3d = new Chunk3D();
-            int[] world = chunk3d.set( seed, blockSize, chunkW, chunkH, y, minY, maxY );
-            world.generateWorld( nChunks );
+        private int[][][] GenerateWorld( int seed, int blockSize, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY ) {
+            Chunk3D.set( seed, blockSize, chunkW, chunkH, y, minY, maxY );
+            int[][][] world = Chunk3D.generateWorld( nChunks );
+
+            Console.WriteLine( world.Length + " " + world[1].Length + " " + world[1][1].Length );
 
             return world;
         }
         
-        // CreateBloc( className, posVec, sizeVec, topMat, otherMat );
+        // Faut améliorer cette fonction :
+        // CreateBloc( blockType, posVec, sizeVec );
         private void CreateBloc(string bloctype, bool breakable)
         {
             string bloc;
