@@ -17,6 +17,7 @@ namespace HammerWorldGenerator
         int solidid = 0;
         int planeid = 0;
         string save;
+
         public Frame()
         {
             InitializeComponent();
@@ -31,8 +32,9 @@ namespace HammerWorldGenerator
             }
         }*/
         
-        private void butGenerate_Click(object sender, EventArgs e)
-        {
+       private void butGenerate_Click(object sender, EventArgs e)
+       {
+            // génération
             GenerateWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 5, Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 5 );
 
             entityid = 0;
@@ -71,21 +73,30 @@ namespace HammerWorldGenerator
                 MessageBox.Show(this, "Succesfully generated the vmf file ! Saved in " + tBoxOutputPath.Text,
                                     "Notification", MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-        }
+       }
         
-        private int[][][] GenerateWorld( int seed, int blockSize, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY ) {
+       private int[][][] GenerateWorld( int seed, int blockSize, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY ) {
             Chunk3D.set( seed, blockSize, chunkW, chunkH, y, minY, maxY );
+            Chunk3D.setFill( ckBoxChunkFill.Checked );
             int[][][] world = Chunk3D.generateWorld( nChunks );
 
-            Console.WriteLine( world.Length + " " + world[1].Length + " " + world[1][1].Length );
-
             return world;
-        }
+       }
         
-        // Faut améliorer cette fonction :
-        // CreateBloc( blockType, posVec, sizeVec );
-        private void CreateBloc(string bloctype, bool breakable)
-        {
+       // Faut améliorer cette fonction :
+       // CreateBloc( blockType, breakable, posVec, sizeVec );
+       private void CreateBloc(string bloctype, bool breakable, int[] posVec, int[] sizeVec)
+       {
+            decimal x = posVec[0];
+            decimal y = posVec[1];
+            decimal z = posVec[2];
+
+            decimal s = numericUpDownBlockSize.Value;
+
+            decimal xs = x + s;
+            decimal ys = y + s;
+            decimal zs = z + s;
+
             string bloc;
             string materialtop = "MC/BEDROCK";
             string materialright = "MC/BEDROCK";
@@ -179,28 +190,31 @@ namespace HammerWorldGenerator
 
             if (bloctype != "skybox" && breakable == false)
             {
+                decimal xs = x + s; // 
+                decimal ys = y + s; // je les bouges plus haut
+                decimal zs = z + s; //
                 bloc = "\tsolid\r\n\t{\r\n\t\t\"id\" \"" + solidid++ + "\"\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(56 0 20) (56 40 20) (96 40 20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+y+" "+zs+ ") ("+x+" "+ys+" "+zs+") ("+xs+"  "+ys+" "+zs+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialtop + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 -51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(56 40 -20) (56 0 -20) (96 0 -20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+ys+" "+z+") ("+x+" "+y+" "+z+") ("+xs+" "+y+" "+z+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialunder + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(56 0 -20) (56 40 -20) (56 40 20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+y+" "+z+") ("+x+" "+ys+" "+z+") ("+x+" "+ys+" "+zs+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialfront + "\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(96 40 -20) (96 0 -20) (96 0 20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+xs+" "+ys+" "+z+") ("+xs+" "+y+" "+z+") ("+xs+" "+y+" "+zs+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialright + "\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(56 40 -20) (96 40 -20) (96 40 20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+ys+" "+z+") ("+xs+" "+ys+" "+z+") ("+xs+" "+ys+" "+zs+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialleft + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(96 0 -20) (56 0 -20) (56 0 20)\"\r\n" +
+                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+xs+" "+y+" "+z+") ("+x+" "+y+" "+z+") ("+x+" "+y+" "+zs+")\"\r\n" +
                        "\t\t\t\"material\" \"" + materialbehind + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 -51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
                        "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n" +
                        "\t\teditor\r\n\t\t{\r\n\t\t\t\"color\" \"0 155 180\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t}\r\n\t}\r\n";
                 save += bloc;
             }
-        }
+       }
     }
 }

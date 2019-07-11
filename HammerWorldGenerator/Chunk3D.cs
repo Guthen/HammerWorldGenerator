@@ -37,6 +37,8 @@ public static class Chunk3D
     static int maxSurfaceY = 5;
     static int[] fillIDs = { 1, 2 };
 
+    static bool fill = true;
+
     static Random random = new Random(seed);
 
     private static bool isInRange(int[] array, int k)
@@ -106,6 +108,11 @@ public static class Chunk3D
         }
     }
 
+    public static void setFill( bool state )
+    {
+        fill = state;
+    }
+
     public static void setFillID(int[] _IDs) {
         fillIDs = _IDs;
     }
@@ -146,7 +153,8 @@ public static class Chunk3D
     }
 
     //  > Fill the chunk
-    public static void fillChunk( ref int[][] _chunk ) { 
+    public static void fillChunk( ref int[][] _chunk ) {
+        if (!fill) return;
         for (int x = 0; x < chunkW; x++)
         {
             var y = getSurfaceY(_chunk, x);
@@ -159,7 +167,7 @@ public static class Chunk3D
                 {
                     _chunk[_y][x] = surface;
                     b = b + 1;
-                    if ( b > 0 && isInRange( fillIDs, b ) && fillIDs[b] > 0 )
+                    if ( isInRange(fillIDs, b) && b > 0 && fillIDs[b] > 0 )
                     {
                         surface = fillIDs[b];
                     }
