@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frame));
             this.gBoxOptions = new System.Windows.Forms.GroupBox();
             this.lOutputPath = new System.Windows.Forms.Label();
             this.tBoxOutputPath = new System.Windows.Forms.TextBox();
             this.gBoxMinecraft = new System.Windows.Forms.GroupBox();
+            this.ckBoxFullBreakable = new System.Windows.Forms.CheckBox();
             this.ckBoxMinecraft = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownBlockSize = new System.Windows.Forms.NumericUpDown();
@@ -45,7 +47,6 @@
             this.tBoxChunkSeed = new System.Windows.Forms.TextBox();
             this.butGenerate = new System.Windows.Forms.Button();
             this.gBoxOutput = new System.Windows.Forms.GroupBox();
-            this.ckBoxFullBreakable = new System.Windows.Forms.CheckBox();
             this.gBoxOptions.SuspendLayout();
             this.gBoxMinecraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).BeginInit();
@@ -69,7 +70,6 @@
             this.gBoxOptions.TabIndex = 0;
             this.gBoxOptions.TabStop = false;
             this.gBoxOptions.Text = "Generator Options";
-            this.gBoxOptions.Enter += new System.EventHandler(this.gBoxOptions_Enter);
             // 
             // lOutputPath
             // 
@@ -84,8 +84,9 @@
             // 
             this.tBoxOutputPath.Location = new System.Drawing.Point(57, 45);
             this.tBoxOutputPath.Name = "tBoxOutputPath";
-            this.tBoxOutputPath.Size = new System.Drawing.Size(158, 20);
+            this.tBoxOutputPath.Size = new System.Drawing.Size(259, 20);
             this.tBoxOutputPath.TabIndex = 8;
+            this.tBoxOutputPath.Text = "C:\\Users\\NAME\\Desktop\\generatemap.vmf";
             // 
             // gBoxMinecraft
             // 
@@ -99,6 +100,16 @@
             this.gBoxMinecraft.TabIndex = 7;
             this.gBoxMinecraft.TabStop = false;
             this.gBoxMinecraft.Text = "Minecraft Options";
+            // 
+            // ckBoxFullBreakable
+            // 
+            this.ckBoxFullBreakable.AutoSize = true;
+            this.ckBoxFullBreakable.Location = new System.Drawing.Point(87, 19);
+            this.ckBoxFullBreakable.Name = "ckBoxFullBreakable";
+            this.ckBoxFullBreakable.Size = new System.Drawing.Size(92, 17);
+            this.ckBoxFullBreakable.TabIndex = 6;
+            this.ckBoxFullBreakable.Text = "full_breakable";
+            this.ckBoxFullBreakable.UseVisualStyleBackColor = true;
             // 
             // ckBoxMinecraft
             // 
@@ -120,7 +131,6 @@
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Block Size :";
-            this.label2.Click += new System.EventHandler(this.Label2_Click);
             // 
             // numericUpDownBlockSize
             // 
@@ -133,7 +143,6 @@
             0,
             0,
             0});
-            this.numericUpDownBlockSize.ValueChanged += new System.EventHandler(this.NumericUpDownBlockWidth_ValueChanged);
             // 
             // lSeed
             // 
@@ -167,7 +176,6 @@
             this.ckBoxChunkFill.TabIndex = 4;
             this.ckBoxChunkFill.Text = "Fill Height";
             this.ckBoxChunkFill.UseVisualStyleBackColor = true;
-            this.ckBoxChunkFill.CheckedChanged += new System.EventHandler(this.CkBoxChunkFill_CheckedChanged);
             // 
             // lHeight
             // 
@@ -205,7 +213,7 @@
             // 
             this.tBoxChunkSeed.Location = new System.Drawing.Point(57, 19);
             this.tBoxChunkSeed.Name = "tBoxChunkSeed";
-            this.tBoxChunkSeed.Size = new System.Drawing.Size(158, 20);
+            this.tBoxChunkSeed.Size = new System.Drawing.Size(259, 20);
             this.tBoxChunkSeed.TabIndex = 5;
             // 
             // butGenerate
@@ -216,7 +224,7 @@
             this.butGenerate.TabIndex = 1;
             this.butGenerate.Text = "Generate";
             this.butGenerate.UseVisualStyleBackColor = true;
-            this.butGenerate.Click += new System.EventHandler(this.ButCompile_Click);
+            this.butGenerate.Click += new System.EventHandler(this.butGenerate_Click);
             // 
             // gBoxOutput
             // 
@@ -228,16 +236,6 @@
             this.gBoxOutput.TabStop = false;
             this.gBoxOutput.Text = "Generator Output";
             // 
-            // ckBoxFullBreakable
-            // 
-            this.ckBoxFullBreakable.AutoSize = true;
-            this.ckBoxFullBreakable.Location = new System.Drawing.Point(87, 19);
-            this.ckBoxFullBreakable.Name = "ckBoxFullBreakable";
-            this.ckBoxFullBreakable.Size = new System.Drawing.Size(92, 17);
-            this.ckBoxFullBreakable.TabIndex = 6;
-            this.ckBoxFullBreakable.Text = "full_breakable";
-            this.ckBoxFullBreakable.UseVisualStyleBackColor = true;
-            // 
             // Frame
             // 
             this.AccessibleName = "HammerWorldGenerator";
@@ -247,7 +245,9 @@
             this.ClientSize = new System.Drawing.Size(496, 468);
             this.Controls.Add(this.gBoxOutput);
             this.Controls.Add(this.gBoxOptions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frame";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hammer World Generator";
             this.gBoxOptions.ResumeLayout(false);
             this.gBoxOptions.PerformLayout();

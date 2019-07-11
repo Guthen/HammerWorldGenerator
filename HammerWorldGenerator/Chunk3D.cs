@@ -22,6 +22,7 @@
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
 */
+
 using System;
 
 public class Chunk3D
@@ -41,7 +42,7 @@ public class Chunk3D
     /*
 	    --  > get config
     */
-
+    
     public int getSeed() {
         return seed;
     }
@@ -91,7 +92,7 @@ public class Chunk3D
     /*
 	    --  > chunks & world
     */
-
+    
     //  > Create Empty Chunk
     public int createEmptyChunk() {
         int[,] _chunk = {};
