@@ -27,7 +27,7 @@ using System;
 
 public static class Chunk3D
 {
-
+    
     static int seed = 0;
     static int cellSize = 8;
     static int chunkW = 600;
@@ -36,7 +36,7 @@ public static class Chunk3D
     static int minSurfaceY = chunkH / cellSize - 15;
     static int maxSurfaceY = 5;
     static int[] fillIDs = { 1, 2 };
-
+    
     static bool fill = true;
 
     static Random random = new Random(seed);

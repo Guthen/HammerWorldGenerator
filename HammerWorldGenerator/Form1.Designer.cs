@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frame));
             this.gBoxOptions = new System.Windows.Forms.GroupBox();
+            this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
             this.lOutputPath = new System.Windows.Forms.Label();
             this.tBoxOutputPath = new System.Windows.Forms.TextBox();
             this.gBoxMinecraft = new System.Windows.Forms.GroupBox();
@@ -46,15 +47,15 @@
             this.nUDownChunkWidth = new System.Windows.Forms.NumericUpDown();
             this.butGenerate = new System.Windows.Forms.Button();
             this.gBoxOutput = new System.Windows.Forms.GroupBox();
-            this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
+            this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.gBoxOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).BeginInit();
             this.gBoxMinecraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).BeginInit();
             this.gBoxChunk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).BeginInit();
             this.gBoxOutput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).BeginInit();
             this.SuspendLayout();
             // 
             // gBoxOptions
@@ -71,6 +72,13 @@
             this.gBoxOptions.TabIndex = 0;
             this.gBoxOptions.TabStop = false;
             this.gBoxOptions.Text = "Generator Options";
+            // 
+            // nUDownSeed
+            // 
+            this.nUDownSeed.Location = new System.Drawing.Point(57, 20);
+            this.nUDownSeed.Name = "nUDownSeed";
+            this.nUDownSeed.Size = new System.Drawing.Size(259, 20);
+            this.nUDownSeed.TabIndex = 5;
             // 
             // lOutputPath
             // 
@@ -260,12 +268,13 @@
             this.gBoxOutput.TabStop = false;
             this.gBoxOutput.Text = "Generator Output";
             // 
-            // nUDownSeed
+            // OutputTextBox
             // 
-            this.nUDownSeed.Location = new System.Drawing.Point(57, 20);
-            this.nUDownSeed.Name = "nUDownSeed";
-            this.nUDownSeed.Size = new System.Drawing.Size(259, 20);
-            this.nUDownSeed.TabIndex = 5;
+            this.OutputTextBox.Location = new System.Drawing.Point(490, 12);
+            this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.Size = new System.Drawing.Size(421, 449);
+            this.OutputTextBox.TabIndex = 2;
+            this.OutputTextBox.Text = "";
             // 
             // Frame
             // 
@@ -273,7 +282,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(496, 468);
+            this.ClientSize = new System.Drawing.Size(923, 468);
+            this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.gBoxOutput);
             this.Controls.Add(this.gBoxOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -282,6 +292,7 @@
             this.Text = "Hammer World Generator";
             this.gBoxOptions.ResumeLayout(false);
             this.gBoxOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).EndInit();
             this.gBoxMinecraft.ResumeLayout(false);
             this.gBoxMinecraft.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).EndInit();
@@ -290,7 +301,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).EndInit();
             this.gBoxOutput.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownSeed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -315,6 +325,7 @@
         private System.Windows.Forms.TextBox tBoxOutputPath;
         private System.Windows.Forms.CheckBox ckBoxFullBreakable;
         private System.Windows.Forms.NumericUpDown nUDownSeed;
+        private System.Windows.Forms.RichTextBox OutputTextBox;
     }
 }
 
