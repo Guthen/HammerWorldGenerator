@@ -341,7 +341,6 @@
             this.rBut3D.TabIndex = 9;
             this.rBut3D.Text = "3D";
             this.rBut3D.UseVisualStyleBackColor = true;
-            this.rBut3D.CheckedChanged += new System.EventHandler(this.RBut3D_CheckedChanged);
             // 
             // rBut2D
             // 
@@ -352,7 +351,6 @@
             this.rBut2D.TabIndex = 8;
             this.rBut2D.Text = "2D";
             this.rBut2D.UseVisualStyleBackColor = true;
-            this.rBut2D.CheckedChanged += new System.EventHandler(this.RBut2D_CheckedChanged);
             // 
             // nUDownSeed
             // 
@@ -385,9 +383,9 @@
             this.ckBoxFullBreakable.AutoSize = true;
             this.ckBoxFullBreakable.Location = new System.Drawing.Point(80, 136);
             this.ckBoxFullBreakable.Name = "ckBoxFullBreakable";
-            this.ckBoxFullBreakable.Size = new System.Drawing.Size(101, 17);
+            this.ckBoxFullBreakable.Size = new System.Drawing.Size(92, 17);
             this.ckBoxFullBreakable.TabIndex = 6;
-            this.ckBoxFullBreakable.Text = "full_breakable ?";
+            this.ckBoxFullBreakable.Text = "Full breakable";
             this.ckBoxFullBreakable.UseVisualStyleBackColor = true;
             // 
             // ckBoxMinecraft
@@ -465,7 +463,6 @@
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Chunks :";
-            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // nUDownChunks
             // 

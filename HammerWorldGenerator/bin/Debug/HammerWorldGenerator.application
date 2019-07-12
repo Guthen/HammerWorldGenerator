@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="HammerWorldGenerator.exe.manifest" size="4796">
+    <dependentAssembly dependencyType="install" codebase="HammerWorldGenerator.exe.manifest" size="5301">
       <assemblyIdentity name="HammerWorldGenerator.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uz/WtjSOgvIRc9fCxbgc+U09qEi8EGP9w8dsBuP+miA=</dsig:DigestValue>
+        <dsig:DigestValue>Q9KhEVTsYs1Ld3EFAtcu8YxmucPsI/iefPH91jF4ksA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

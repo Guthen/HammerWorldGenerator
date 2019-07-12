@@ -19,9 +19,9 @@ namespace HammerWorldGenerator
         decimal _TailleTexture = 0.5m;
         string TailleTexture;
 
-        string save;
+        string save = "";
         string comment = "// This .vmf has been created with Hammer World Generator (https://github.com/Guthen/HammerWorldGenerator).\n";
-        string bloc;
+        string bloc = "";
 
         string materialtop = "MC/BEDROCK";
         string materialright = "MC/BEDROCK";
@@ -192,14 +192,14 @@ namespace HammerWorldGenerator
             string output = "world = {\n";
             for (int c = 0; c < world.Length; c++)
             {
-                output = output + "\t[" + c + "] = {\n";
+                output += "\t[" + c + "] = {\n";
                 for (int y = 0; y < world[c].Length; y++)
                 {
-                    output = output + "\t\t[" + y + "] = { ";
+                    output += "\t\t[" + y + "] = { ";
                     for (int x = 0; x < world[c][y].Length; x++)
                     {
                         var xv = world[c][y][x];
-                        output = output + xv + ", ";
+                        output += xv + ", ";
 
                         if (xv <= 0) continue;
 
@@ -227,11 +227,11 @@ namespace HammerWorldGenerator
 
                         CreateBloc(bloctype, breakable, position, size);
                     }
-                    output = output + " },\n";
+                    output += " },\n";
                 }
-                output = output + "\t},\n";
+                output += "\t},\n";
             }
-            output = output + "}";
+            output += "}";
 
             OutputTextBox.Text = output;
 
@@ -291,13 +291,13 @@ namespace HammerWorldGenerator
 
                             CreateBloc(bloctype, breakable, position, size);
                         }
-                        output = output + " },\n";
+                        output += " },\n";
                     }
-                    output = output + "\t\t},\n";
+                    output += "\t\t},\n";
                 }
-                output = output + "\t},\n";
+                output += "\t},\n";
             }
-            output = output + "}";
+            output += "}";
 
             OutputTextBox.Text = output;
 
@@ -322,7 +322,7 @@ namespace HammerWorldGenerator
             string output = "world = {\n";
             for (int x = 0; x < world.Length; x++)
             {
-                output = output + "\t\t[" + x + "] = { ";
+                output += "\t\t[" + x + "] = { ";
                 for (int y = 0; y < world[x].Length; y++)
                 {
                     var p = i / (max) * 100;
@@ -331,7 +331,7 @@ namespace HammerWorldGenerator
                     Console.WriteLine("i: " + i + "#w*#w: " + world.Length * world[x].Length + " p: " + p);
 
                     var z = Math.Round( world[x][y] * 10 );
-                    output = output + z + ", ";
+                    output += z + ", ";
 
                     // get position & size
                     var s = numericUpDownBlockSize.Value;
@@ -352,11 +352,11 @@ namespace HammerWorldGenerator
                     CreateBloc(bloctype, breakable, position, size);
                     i++;
                 }
-                output = output + " },\n";
+                output += " },\n";
                 i++;
             }
-            output = output + "\t},\n";
-            output = output + "}";
+            output += "\t},\n";
+            output += "}";
 
             OutputTextBox.Text = output;
 
@@ -380,112 +380,53 @@ namespace HammerWorldGenerator
             decimal zs = z + sizeVec[2]; //
 
             GetBlocMat(bloctype, breakable);
-            string blocbase;
-            Decimal pricePerOunce = 17.36m;
-            String s = String.Format("The current price is {0} per ounce.", pricePerOunce);
 
-            blocbase = "\tsolid\r\n\t{\r\n\t\t\"id\" \"{0}\"\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {3} {7}) ({2} {6} {7}) ({5}  {6} {7})\"\r\n" +
-                       "\t\t\t\"material\" \"{9}\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {6} {4}) ({2} {3} {4}) ({5} {3} {4})\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialunder + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"(" + x + " " + y + " " + z + ") (" + x + " " + ys + " " + z + ") (" + x + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialfront + "11}\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"(" + xs + " " + ys + " " + z + ") (" + xs + " " + y + " " + z + ") (" + xs + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"{12}" + materialright + "\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"(" + x + " " + ys + " " + z + ") (" + xs + " " + ys + " " + z + ") (" + xs + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialleft + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"(" + xs + " " + y + " " + z + ") (" + x + " " + y + " " + z + ") (" + x + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialbehind + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n";
-      bloc = String.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind);
-            //                          0         1        2  3  4  5   6   7        8             9            10                11           12              13           14
+
+            string blocbase = "\tsolid\r\n\t{15}\r\n\t\t\"id\" \"{0}\"\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {3} {7}) ({2} {6} {7}) ({5}  {6} {7})\"\r\n" +
+                              "\t\t\t\"material\" \"{9}\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {6} {4}) ({2} {3} {4}) ({5} {3} {4})\"\r\n" +
+                              "\t\t\t\"material\" \"{10}\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {3} {4}) ({2} {6} {4}) ({2} {6} {7})\"\r\n" +
+                              "\t\t\t\"material\" \"{11}\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({5} {6} {4}) ({5} {3} {4}) ({5} {3} {7})\"\r\n" +
+                              "\t\t\t\"material\" \"{12}\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {6} {4}) ({5} {6} {4}) ({5} {6} {7})\"\r\n" +
+                              "\t\t\t\"material\" \"{13}\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n" +
+                              "\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({5} {3} {4}) ({2} {3} {4}) ({2} {3} {7})\"\r\n" +
+                              "\t\t\t\"material\" \"{14}\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] {8}\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] {8}\"\r\n" +
+                              "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n" +
+                              "\t\teditor\r\n\t\t{15}\r\n\t\t\t\"color\" \"0 155 180\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t{16}\r\n\t{16}\r\n";
+            //bloc = String.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
+            //                                  0         1        2  3  4  5   6   7        8             9            10                11           12              13           14          15   16
 
             if (bloctype == "skybox")
             {
-                bloc = "\tsolid\r\n\t{\r\n\t\t\"id\" \"" + solidid++ + "\"\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + y + " " + zs + ") (" + x + " " + ys + " " + zs + ") (" + xs + "  " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"MC/BEDROCK\"\r\n\t\t\t\"uaxis\" \"[1 0 0 -51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + ys + " " + z + ") (" + x + " " + y + " " + z + ") (" + xs + " " + y + " " + z + ")\"\r\n" +
-                       "\t\t\t\"material\" \"TOOLS/TOOLSSKYBOX\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + y + " " + z + ") (" + x + " " + ys + " " + z + ") (" + x + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"TOOLS/TOOLSSKYBOX\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + xs + " " + ys + " " + z + ") (" + xs + " " + y + " " + z + ") (" + xs + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"TOOLS/TOOLSSKYBOX\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + ys + " " + z + ") (" + xs + " " + ys + " " + z + ") (" + xs + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"TOOLS/TOOLSSKYBOX\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + xs + " " + y + " " + z + ") (" + x + " " + y + " " + z + ") (" + x + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"TOOLS/TOOLSSKYBOX\"\r\n\t\t\t\"uaxis\" \"[1 0 0 -51.2] 0.3125\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 -64] 0.3125\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n" +
-                       "\t\teditor\r\n\t\t{\r\n\t\t\t\"color\" \"0 155 180\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t}\r\n\t}\r\n";
-                save += bloc;
+                bloc = string.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
             }
-
-            if (bloctype != "skybox" &&  breakable == true)
+            else if (bloctype != "skybox" &&  breakable == true)
             {
                 bloc = "entity\r\n{\r\n\t\"id\" \"" + entityid++ + "\"\r\n\t\"classname\" \"func_breakable\"\r\n\t\"disablereceiveshadows\" \"0\"\r\n\t\"disableshadows\" \"0\"\r\n" +
                        "\t\"ExplodeDamage\" \"0\"\r\n\t\"explodemagnitude\" \"0\"\r\n\t\"ExplodeRadius\" \"0\"\r\n\t\"explosion\" \"1\"\r\n\t\"gibdir\" \"0 0 0\"\r\n" +
                        "\t\"gmod_allowphysgun\" \"0\"\r\n\t\"health\" \"30\"\r\n\t\"material\" \"5\"\r\n\t\"minhealthdmg\" \"0\"\r\n\t\"nodamageforces\" \"0\"\r\n" +
                        "\t\"origin\" \"100 124 36\"\r\n\t\"PerformanceMode\" \"0\"\r\n\t\"physdamagescale\" \"1.0\"\r\n\t\"pressuredelay\" \"0\"\r\n" +
                        "\t\"propdata\" \"0\"\r\n\t\"renderamt\" \"255\"\r\n\t\"rendercolor\" \"255 255 255\"\r\n\t\"renderfx\" \"0\"\r\n\t\"rendermode\" \"0\"\r\n" +
-                       "\t\"spawnflags\" \"0\"\r\n\t\"spawnobject\" \"0\"\r\n\tsolid\r\n\t{\r\n\t\t\"id\" \"" + solidid++ + "\"\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + y + " " + zs + ") (" + x + " " + ys + " " + zs + ") (" + xs + "  " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialtop + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] " + TailleTexture + "\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + ys + " " + z + ") (" + x + " " + y + " " + z + ") (" + xs + " " + y + " " + z + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialunder + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] " + TailleTexture + "\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + y + " " + z + ") (" + x + " " + ys + " " + z + ") (" + x + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialfront + "\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] " + TailleTexture + "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + xs + " " + ys + " " + z + ") (" + xs + " " + y + " " + z + ") (" + xs + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialright + "\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] " + TailleTexture + "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + x + " " + ys + " " + z + ") (" + xs + " " + ys + " " + z + ") (" + xs + " " + ys + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialleft + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] " + TailleTexture + "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"(" + xs + " " + y + " " + z + ") (" + x + " " + y + " " + z + ") (" + x + " " + y + " " + zs + ")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialbehind + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n" +
-                       "\t\teditor\r\n\t\t{\r\n\t\t\t\"color\" \"0 155 180\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t}\r\n\t}\r\n" +
-                       "\teditor\r\n\t{\r\n\t\t\"color\" \"220 30 220\"\r\n\t\t\"visgroupshown\" \"1\"\r\n\t\t\"visgroupautoshown\" \"1\"\r\n\t\t\"logicalpos\" \"[0 11000]\"\r\n\t}\r\n}\r\n";
-                save += bloc;
-            }
+                       "\t\"spawnflags\" \"0\"\r\n\t\"spawnobject\" \"0\"\r\n";
 
-            if (bloctype != "skybox" && breakable == false)
-            {
-                bloc = "\tsolid\r\n\t{\r\n\t\t\"id\" \"" + solidid++ + "\"\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+y+" "+zs+ ") ("+x+" "+ys+" "+zs+") ("+xs+"  "+ys+" "+zs+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialtop + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+ys+" "+z+") ("+x+" "+y+" "+z+") ("+xs+" "+y+" "+z+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialunder + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+y+" "+z+") ("+x+" "+ys+" "+z+") ("+x+" "+ys+" "+zs+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialfront + "\"\r\n\t\t\t\"uaxis\" \"[0 -1 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+xs+" "+ys+" "+z+") ("+xs+" "+y+" "+z+") ("+xs+" "+y+" "+zs+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialright + "\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+x+" "+ys+" "+z+") ("+xs+" "+ys+" "+z+") ("+xs+" "+ys+" "+zs+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialleft + "\"\r\n\t\t\t\"uaxis\" \"[-1 0 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n\t\tside\r\n" +
-                       "\t\t{\r\n\t\t\t\"id\" \"" + planeid++ + "\"\r\n\t\t\t\"plane\" \"("+xs+" "+y+" "+z+") ("+x+" "+y+" "+z+") ("+x+" "+y+" "+zs+")\"\r\n" +
-                       "\t\t\t\"material\" \"" + materialbehind + "\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] "+TailleTexture+ "\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] " + TailleTexture + "\"\r\n" +
-                       "\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t}\r\n" +
-                       "\t\teditor\r\n\t\t{\r\n\t\t\t\"color\" \"0 155 180\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t}\r\n\t}\r\n";
-                save += bloc;
+                bloc += string.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
+
+                bloc += "\teditor\r\n\t{\r\n\t\t\"color\" \"220 30 220\"\r\n\t\t\"visgroupshown\" \"1\"\r\n\t\t\"visgroupautoshown\" \"1\"\r\n\t\t\"logicalpos\" \"[0 11000]\"\r\n\t}\r\n}\r\n";
             }
+            else if (bloctype != "skybox" && breakable == false)
+            {
+                bloc = string.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
+            }
+            save += bloc;
         }
         private void GetBlocMat(string bloctype, bool breakable)
         {
@@ -592,18 +533,6 @@ namespace HammerWorldGenerator
             {
                 materialunder = "TOOLS/TOOLSNODRAW";
             }
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void RBut3D_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void RBut2D_CheckedChanged(object sender, EventArgs e)
-        {
         }
     }
 }
