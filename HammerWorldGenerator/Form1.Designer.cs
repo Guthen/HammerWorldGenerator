@@ -655,6 +655,7 @@
             this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.gBoxOutput);
             this.Controls.Add(this.gBoxOptions);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(939, 507);
