@@ -30,6 +30,8 @@ namespace HammerWorldGenerator
         string materialfront = "MC/BEDROCK";
         string materialunder = "MC/BEDROCK";
 
+        int HammerBrushLimit = 1024;
+
         public Frame()
         {
             InitializeComponent();
@@ -64,17 +66,51 @@ namespace HammerWorldGenerator
 
             if (rBut2D.Checked) // 2d stuff
             {
-                var world = Generate2DWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), Convert.ToInt32( nUDownChunks.Value ), Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 3 );
-                Convert2DWorldToVmf(world, breakable);
+                if ( coBoxResult.Text == "Minecraft" )
+                {
+                    if ( Convert.ToInt32( nUDownChunkWidth.Value ) > HammerBrushLimit ) {
+                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générer " + nUDownChunkWidth.Value +" brushs ! Souhaitez-vous continuer ?",
+                                      "Warning", MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        
+                        if ( result == DialogResult.No )
+                        {
+                            return;
+                        }
+                    }
+
+                    var world = Generate2DWorld(Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(numericUpDownBlockSize.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
+                    Convert2DWorldToVmf(world, breakable);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Vous ne pouvez pas créer un displacement en 2D !",
+                                      "Erreur", MessageBoxButtons.OK,
+                                      MessageBoxIcon.Error);
+                    return;
+                }
             }
             else if (rBut3D.Checked) // 3d stuff
             {
-                var world = Generate3DWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), Convert.ToInt32( nUDownChunks.Value ), Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 3 );
+                var world = Generate3DWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 1, Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 3 );
                 Convert3DWorldToVmf(world, breakable);
             }
             else
             {
-                var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(nUDownChunks.Value), Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
+                var w = Convert.ToInt32(nUDownChunkWidth.Value);
+                if ( w * w > HammerBrushLimit )
+                {
+                    var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée ("+HammerBrushLimit+") si vous générer " + w * w + " brushs ! Souhaitez-vous continuer ?",
+                                  "Warning", MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                    if (result == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
                 ConvertPerlin3DWorldToVmf(hMap, breakable);
             }
 

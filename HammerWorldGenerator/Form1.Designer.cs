@@ -50,14 +50,11 @@
             this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
             this.gBoxMinecraft = new System.Windows.Forms.GroupBox();
             this.ckBoxFullBreakable = new System.Windows.Forms.CheckBox();
-            this.ckBoxMinecraft = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownBlockSize = new System.Windows.Forms.NumericUpDown();
             this.ckBoxChunkFill = new System.Windows.Forms.CheckBox();
             this.lSeed = new System.Windows.Forms.Label();
             this.gBoxChunk = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nUDownChunks = new System.Windows.Forms.NumericUpDown();
             this.lHeight = new System.Windows.Forms.Label();
             this.nUDownChunkHeight = new System.Windows.Forms.NumericUpDown();
             this.lWidth = new System.Windows.Forms.Label();
@@ -68,6 +65,8 @@
             this.gBoxOutput = new System.Windows.Forms.GroupBox();
             this.pBarFinish = new System.Windows.Forms.ProgressBar();
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
+            this.coBoxResult = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.gBoxOptions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracGain)).BeginInit();
@@ -78,7 +77,6 @@
             this.gBoxMinecraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).BeginInit();
             this.gBoxChunk.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownChunks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).BeginInit();
             this.gBoxOutput.SuspendLayout();
@@ -86,6 +84,8 @@
             // 
             // gBoxOptions
             // 
+            this.gBoxOptions.Controls.Add(this.label1);
+            this.gBoxOptions.Controls.Add(this.coBoxResult);
             this.gBoxOptions.Controls.Add(this.groupBox1);
             this.gBoxOptions.Controls.Add(this.label3);
             this.gBoxOptions.Controls.Add(this.rButPerlin3D);
@@ -367,13 +367,12 @@
             // gBoxMinecraft
             // 
             this.gBoxMinecraft.Controls.Add(this.ckBoxFullBreakable);
-            this.gBoxMinecraft.Controls.Add(this.ckBoxMinecraft);
             this.gBoxMinecraft.Controls.Add(this.label2);
             this.gBoxMinecraft.Controls.Add(this.numericUpDownBlockSize);
             this.gBoxMinecraft.Controls.Add(this.ckBoxChunkFill);
-            this.gBoxMinecraft.Location = new System.Drawing.Point(279, 245);
+            this.gBoxMinecraft.Location = new System.Drawing.Point(279, 367);
             this.gBoxMinecraft.Name = "gBoxMinecraft";
-            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 198);
+            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 76);
             this.gBoxMinecraft.TabIndex = 7;
             this.gBoxMinecraft.TabStop = false;
             this.gBoxMinecraft.Text = "Minecraft Options";
@@ -381,29 +380,17 @@
             // ckBoxFullBreakable
             // 
             this.ckBoxFullBreakable.AutoSize = true;
-            this.ckBoxFullBreakable.Location = new System.Drawing.Point(80, 136);
+            this.ckBoxFullBreakable.Location = new System.Drawing.Point(89, 50);
             this.ckBoxFullBreakable.Name = "ckBoxFullBreakable";
             this.ckBoxFullBreakable.Size = new System.Drawing.Size(92, 17);
             this.ckBoxFullBreakable.TabIndex = 6;
             this.ckBoxFullBreakable.Text = "Full breakable";
             this.ckBoxFullBreakable.UseVisualStyleBackColor = true;
             // 
-            // ckBoxMinecraft
-            // 
-            this.ckBoxMinecraft.AutoSize = true;
-            this.ckBoxMinecraft.Checked = true;
-            this.ckBoxMinecraft.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckBoxMinecraft.Location = new System.Drawing.Point(9, 19);
-            this.ckBoxMinecraft.Name = "ckBoxMinecraft";
-            this.ckBoxMinecraft.Size = new System.Drawing.Size(71, 17);
-            this.ckBoxMinecraft.TabIndex = 0;
-            this.ckBoxMinecraft.Text = "Activated";
-            this.ckBoxMinecraft.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 45);
+            this.label2.Location = new System.Drawing.Point(6, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 5;
@@ -411,7 +398,7 @@
             // 
             // numericUpDownBlockSize
             // 
-            this.numericUpDownBlockSize.Location = new System.Drawing.Point(75, 42);
+            this.numericUpDownBlockSize.Location = new System.Drawing.Point(75, 19);
             this.numericUpDownBlockSize.Name = "numericUpDownBlockSize";
             this.numericUpDownBlockSize.Size = new System.Drawing.Size(68, 20);
             this.numericUpDownBlockSize.TabIndex = 4;
@@ -424,7 +411,7 @@
             // ckBoxChunkFill
             // 
             this.ckBoxChunkFill.AutoSize = true;
-            this.ckBoxChunkFill.Location = new System.Drawing.Point(9, 136);
+            this.ckBoxChunkFill.Location = new System.Drawing.Point(6, 51);
             this.ckBoxChunkFill.Name = "ckBoxChunkFill";
             this.ckBoxChunkFill.Size = new System.Drawing.Size(74, 17);
             this.ckBoxChunkFill.TabIndex = 4;
@@ -442,8 +429,6 @@
             // 
             // gBoxChunk
             // 
-            this.gBoxChunk.Controls.Add(this.label1);
-            this.gBoxChunk.Controls.Add(this.nUDownChunks);
             this.gBoxChunk.Controls.Add(this.lHeight);
             this.gBoxChunk.Controls.Add(this.nUDownChunkHeight);
             this.gBoxChunk.Controls.Add(this.lWidth);
@@ -454,37 +439,6 @@
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
             this.gBoxChunk.Text = "Chunk Options";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Chunks :";
-            // 
-            // nUDownChunks
-            // 
-            this.nUDownChunks.Location = new System.Drawing.Point(53, 71);
-            this.nUDownChunks.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nUDownChunks.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUDownChunks.Name = "nUDownChunks";
-            this.nUDownChunks.Size = new System.Drawing.Size(58, 20);
-            this.nUDownChunks.TabIndex = 5;
-            this.nUDownChunks.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // lHeight
             // 
@@ -530,7 +484,7 @@
             // 
             this.nUDownChunkWidth.Location = new System.Drawing.Point(53, 19);
             this.nUDownChunkWidth.Maximum = new decimal(new int[] {
-            128,
+            99999,
             0,
             0,
             0});
@@ -543,7 +497,7 @@
             this.nUDownChunkWidth.Size = new System.Drawing.Size(58, 20);
             this.nUDownChunkWidth.TabIndex = 0;
             this.nUDownChunkWidth.Value = new decimal(new int[] {
-            64,
+            32,
             0,
             0,
             0});
@@ -604,6 +558,27 @@
             this.OutputTextBox.TabIndex = 2;
             this.OutputTextBox.Text = "";
             // 
+            // coBoxResult
+            // 
+            this.coBoxResult.FormattingEnabled = true;
+            this.coBoxResult.Items.AddRange(new object[] {
+            "Minecraft",
+            "Displacement"});
+            this.coBoxResult.Location = new System.Drawing.Point(298, 20);
+            this.coBoxResult.Name = "coBoxResult";
+            this.coBoxResult.Size = new System.Drawing.Size(147, 21);
+            this.coBoxResult.TabIndex = 21;
+            this.coBoxResult.Text = "Displacement";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(249, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Result :";
+            // 
             // Frame
             // 
             this.AccessibleName = "HammerWorldGenerator";
@@ -632,7 +607,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).EndInit();
             this.gBoxChunk.ResumeLayout(false);
             this.gBoxChunk.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownChunks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).EndInit();
             this.gBoxOutput.ResumeLayout(false);
@@ -656,14 +630,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownBlockSize;
         private System.Windows.Forms.GroupBox gBoxMinecraft;
-        private System.Windows.Forms.CheckBox ckBoxMinecraft;
         private System.Windows.Forms.Label lOutputPath;
         private System.Windows.Forms.TextBox tBoxOutputPath;
         private System.Windows.Forms.CheckBox ckBoxFullBreakable;
         private System.Windows.Forms.NumericUpDown nUDownSeed;
         private System.Windows.Forms.RichTextBox OutputTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown nUDownChunks;
         private System.Windows.Forms.RadioButton rBut3D;
         private System.Windows.Forms.RadioButton rBut2D;
         private System.Windows.Forms.Label label3;
@@ -684,6 +655,8 @@
         private System.Windows.Forms.NumericUpDown nUDownFracLacunarity;
         private System.Windows.Forms.ComboBox cBoxNoiseType;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox coBoxResult;
     }
 }
 

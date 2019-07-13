@@ -43,3 +43,8 @@ C:\Users\COUPART\Desktop\hammerwg\HammerWorldGenerator.application
 C:\Users\COUPART\Desktop\hammerwg\HammerWorldGenerator.exe
 C:\Users\COUPART\Desktop\hammerwg\HammerWorldGenerator.pdb
 C:\Users\COUPART\source\repos\HammerWorldGenerator\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csprojAssemblyReference.cache
+C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.exe.config
+C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.exe.manifest
+C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.application
+C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.exe
+C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.pdb
