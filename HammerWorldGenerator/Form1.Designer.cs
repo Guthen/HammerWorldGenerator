@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frame));
             this.gBoxOptions = new System.Windows.Forms.GroupBox();
+            this.ButReload = new System.Windows.Forms.Button();
             this.gBoxSave = new System.Windows.Forms.GroupBox();
             this.ButReset = new System.Windows.Forms.Button();
             this.ButLoad = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.ButReload = new System.Windows.Forms.Button();
             this.gBoxOptions.SuspendLayout();
             this.gBoxSave.SuspendLayout();
             this.gBoxPerlin.SuspendLayout();
@@ -111,6 +111,16 @@
             this.gBoxOptions.TabIndex = 0;
             this.gBoxOptions.TabStop = false;
             this.gBoxOptions.Text = "Generator Options";
+            // 
+            // ButReload
+            // 
+            this.ButReload.Location = new System.Drawing.Point(167, 18);
+            this.ButReload.Name = "ButReload";
+            this.ButReload.Size = new System.Drawing.Size(54, 23);
+            this.ButReload.TabIndex = 24;
+            this.ButReload.Text = "Reload";
+            this.ButReload.UseVisualStyleBackColor = true;
+            this.ButReload.Click += new System.EventHandler(this.ButReload_Click);
             // 
             // gBoxSave
             // 
@@ -635,16 +645,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // ButReload
-            // 
-            this.ButReload.Location = new System.Drawing.Point(167, 18);
-            this.ButReload.Name = "ButReload";
-            this.ButReload.Size = new System.Drawing.Size(54, 23);
-            this.ButReload.TabIndex = 24;
-            this.ButReload.Text = "Reload";
-            this.ButReload.UseVisualStyleBackColor = true;
-            this.ButReload.Click += new System.EventHandler(this.ButReload_Click);
-            // 
             // Frame
             // 
             this.AccessibleName = "HammerWorldGenerator";
@@ -656,6 +656,9 @@
             this.Controls.Add(this.gBoxOutput);
             this.Controls.Add(this.gBoxOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(939, 507);
+            this.MinimumSize = new System.Drawing.Size(939, 507);
             this.Name = "Frame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hammer World Generator";
