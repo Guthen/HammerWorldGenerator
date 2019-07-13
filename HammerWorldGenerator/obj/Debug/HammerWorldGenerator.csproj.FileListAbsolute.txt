@@ -48,3 +48,13 @@ C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.exe.manifest
 C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.application
 C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.exe
 C:\Users\arthu\Desktop\hammerwg\HammerWorldGenerator.pdb
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csprojAssemblyReference.cache
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Frame.resources
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.Properties.Resources.resources
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.GenerateResource.cache
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.csproj.CoreCompileInputs.cache
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.TrustInfo.xml
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe.manifest
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.application
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.exe
+C:\Users\COUPART\Desktop\HammerWorldGenerator-master (1)\HammerWorldGenerator-master\HammerWorldGenerator\obj\Debug\HammerWorldGenerator.pdb

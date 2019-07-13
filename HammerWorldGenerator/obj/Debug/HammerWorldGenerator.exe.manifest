@@ -43,24 +43,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HammerWorldGenerator.exe" size="226272">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HammerWorldGenerator.exe" size="232416">
       <assemblyIdentity name="HammerWorldGenerator" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ITJ7VBlKjxj0EMTopUGcXxMPrtyIkJpHf94YYKZoPCM=</dsig:DigestValue>
+        <dsig:DigestValue>6RWnFo6m1M5K4/2pibZ0MPOCKIwm7ZKqtg40qKu1SK8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="HammerWorldGenerator.exe.config" size="189">
+  <file name="HammerWorldGenerator.exe.config" size="184">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
+      <dsig:DigestValue>X+GtgC9o18R9u9jmAWK6iKuu0WLaXTgchdPkk1MRli4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="HammerWorldGenerator.ico" size="72444">

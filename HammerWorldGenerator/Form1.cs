@@ -20,8 +20,8 @@ namespace HammerWorldGenerator
         string TailleTexture;
 
         string save = "";
-        string comment = "// This .vmf has been created with Hammer World Generator (https://github.com/Guthen/HammerWorldGenerator).\n";
         string bloc = "";
+        string savetype = "";
 
         string materialtop = "MC/BEDROCK";
         string materialright = "MC/BEDROCK";
@@ -30,7 +30,7 @@ namespace HammerWorldGenerator
         string materialfront = "MC/BEDROCK";
         string materialunder = "MC/BEDROCK";
 
-        int HammerBrushLimit = 1024;
+        readonly int HammerBrushLimit = 1024;
 
         public Frame()
         {
@@ -44,9 +44,149 @@ namespace HammerWorldGenerator
                         sr.Close();
             }
         }
-        
-        private void butGenerate_Click(object sender, EventArgs e)
+
+        private void ButSave_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                InitialDirectory = @"D:\",
+                Title = "Save text Files",
+
+                CheckFileExists = false,
+                CheckPathExists = true,
+
+                DefaultExt = "txt",
+                Filter = "txt files (*.txt)|*.txt",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+            };
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (rBut2D.Checked) { savetype = "2D"; } else if (rBut3D.Checked) { savetype = "3D"; } else if (rButPerlin3D.Checked) { savetype = "Perlin 3D"; } else { savetype = "unknown"; }
+                // save file path 
+                StreamWriter ssw = new StreamWriter(saveFileDialog1.FileName);
+                ssw.WriteLine(tBoxOutputPath.Text);
+                ssw.WriteLine(nUDownSeed.Value);
+                ssw.WriteLine(savetype);
+                ssw.WriteLine(coBoxInterp.SelectedItem);
+                ssw.WriteLine(cBoxNoiseType.SelectedItem);
+                ssw.WriteLine(nUDownFrequency.Value);
+                ssw.WriteLine(nUDownFracOctaves.Value);
+                ssw.WriteLine(nUDownFracLacunarity.Value);
+                ssw.WriteLine(nUDownFracGain.Value);
+                ssw.WriteLine(nUDownChunkWidth.Value);
+                ssw.WriteLine(nUDownChunkHeight.Value);
+                ssw.WriteLine(numericUpDownBlockSize.Value);
+                ssw.WriteLine(ckBoxChunkFill.CheckState);
+                ssw.WriteLine(ckBoxFullBreakable.CheckState);
+                ssw.Close();
+                MessageBox.Show(this, "Succesfully saved current settings in " + saveFileDialog1.FileName, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ButLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"D:\",
+                Title = "Load settings",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "txt",
+                Filter = "txt files (*.txt)|*.txt",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+            };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // load file path
+                if (File.Exists(openFileDialog1.FileName))
+                {
+                    bool ck;
+                    StreamReader ssr = new StreamReader(openFileDialog1.FileName);
+                    tBoxOutputPath.Text = ssr.ReadLine();
+                    nUDownSeed.Value = Convert.ToDecimal(ssr.ReadLine());
+                    savetype = ssr.ReadLine();
+                    if (savetype == "2D") { rBut2D.AutoCheck = true; } else { rBut2D.AutoCheck = false; }
+                    if (savetype == "3D") { rBut3D.AutoCheck = true; } else { rBut3D.AutoCheck = false; }
+                    if (savetype == "Perlin 3D") { rButPerlin3D.AutoCheck = true; } else { rButPerlin3D.AutoCheck = false; }
+                    coBoxInterp.SelectedItem = ssr.ReadLine();
+                    cBoxNoiseType.SelectedItem = ssr.ReadLine();
+                    nUDownFrequency.Value = Convert.ToDecimal(ssr.ReadLine());
+                    nUDownFracOctaves.Value = Convert.ToDecimal(ssr.ReadLine());
+                    nUDownFracLacunarity.Value = Convert.ToDecimal(ssr.ReadLine());
+                    nUDownFracGain.Value = Convert.ToDecimal(ssr.ReadLine());
+                    nUDownChunkWidth.Value = Convert.ToDecimal(ssr.ReadLine());
+                    nUDownChunkHeight.Value = Convert.ToDecimal(ssr.ReadLine());
+                    numericUpDownBlockSize.Value = Convert.ToDecimal(ssr.ReadLine());
+                    if (ssr.ReadLine() == "Checked") { ck = true; } else { ck = false; }
+                    ckBoxChunkFill.Checked = ck;
+                    if (ssr.ReadLine() == "Checked") { ck = true; } else { ck = false; }
+                    ckBoxFullBreakable.Checked = ck;
+                    ssr.Close();
+                    MessageBox.Show(this, "Succesfully loaded previous settings in " + openFileDialog1.FileName, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ButReset_Click(object sender, EventArgs e)
+        {
+            tBoxOutputPath.Text = "C:\\Users\\NAME\\Desktop\\generatemap.vmf";
+            nUDownSeed.Value = DateTime.Now.Millisecond;
+            rBut2D.AutoCheck = false;
+            rBut3D.AutoCheck = false;
+            rButPerlin3D.AutoCheck = true;
+            coBoxInterp.SelectedItem = "Quintic";
+            cBoxNoiseType.SelectedItem = "Perlin Fractal";
+            nUDownFrequency.Value = 0.01m;
+            nUDownFracOctaves.Value = 3m;
+            nUDownFracLacunarity.Value = 2.00m;
+            nUDownFracGain.Value = 0.50m;
+            nUDownChunkWidth.Value = 32;
+            nUDownChunkHeight.Value = 32;
+            numericUpDownBlockSize.Value = 40m;
+            ckBoxChunkFill.Checked = false;
+            ckBoxFullBreakable.Checked = false;
+            MessageBox.Show(this, "Succesfully reseted the settings", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ButReload_Click(object sender, EventArgs e)
+        {
+            nUDownSeed.Value = DateTime.Now.Millisecond;
+        }
+
+        private void ButGenerate_Click(object sender, EventArgs e)
+        {
+            string type;
+            if (rBut2D.Checked) { type = "2D"; } else if (rBut3D.Checked) { type = "3D"; } else if (rButPerlin3D.Checked) { type = "Perlin 3D"; } else { type = "unknown"; }
+            string comment = "/////////////////////////////////////////////////////////////////////////////\r\n" +
+                         "// This .vmf has been created with Hammer World Generator\r\n " +
+                         "// (https://github.com/Guthen/HammerWorldGenerator).\r\n" +
+                         "//       - Generator Options -\r\n" +
+                         "// Seed               = " + nUDownSeed.Value + "\r\n" +
+                         "// Type               = " + type + "\r\n" +
+                         "// \r\n" +
+                         "//       - Perlin Options -\r\n" +
+                         "// Interpolation      = " + coBoxInterp.SelectedItem + "\r\n" +
+                         "// Noise type         = " + cBoxNoiseType.SelectedItem + "\r\n" +
+                         "// Frequency          = " + nUDownFrequency.Value + "\r\n" +
+                         "// Fractal Octaves    = " + nUDownFracOctaves.Value + "\r\n" +
+                         "// Fractal Lacunarity = " + nUDownFracLacunarity.Value + "\r\n" +
+                         "// Fractal Gain       = " + nUDownFracGain.Value + "\r\n" +
+                         "// \r\n" +
+                         "//       - Chunk Options -\r\n" +
+                         "// Width              = " + nUDownChunkWidth.Value + "\r\n" +
+                         "// Height             = " + nUDownChunkHeight.Value + "\r\n" +
+                         "// \r\n" +
+                         "//       - Minecraft Options -\r\n" +
+                         "// Block Size         = " + numericUpDownBlockSize.Value + "\r\n" +
+                         "// Fill Bottom        = " + ckBoxChunkFill.CheckState + "\r\n" +
+                         "// Full Breakable     = " + ckBoxFullBreakable.CheckState + "\r\n" +
+                         "/////////////////////////////////////////////////////////////////////////////\r\n";
             // reset
             pBarFinish.Value = 0;
 
@@ -69,7 +209,7 @@ namespace HammerWorldGenerator
                 if ( coBoxResult.Text == "Minecraft" )
                 {
                     if ( Convert.ToInt32( nUDownChunkWidth.Value ) > HammerBrushLimit ) {
-                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générer " + nUDownChunkWidth.Value +" brushs ! Souhaitez-vous continuer ?",
+                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générez " + nUDownChunkWidth.Value +" brushs ! Souhaitez-vous continuer ?",
                                       "Warning", MessageBoxButtons.YesNo,
                                       MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                         
@@ -102,7 +242,7 @@ namespace HammerWorldGenerator
                     var w = Convert.ToInt32(nUDownChunkWidth.Value);
                     if (w * w > HammerBrushLimit)
                     {
-                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générer " + w * w + " brushs ! Souhaitez-vous continuer ?",
+                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générez " + w * w + " brushs ! Souhaitez-vous continuer ?",
                                       "Warning", MessageBoxButtons.YesNo,
                                       MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
@@ -112,7 +252,7 @@ namespace HammerWorldGenerator
                         }
                     }
 
-                    var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
+                    var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
                     ConvertPerlin3DWorldToVmf(hMap, breakable);
                 }
 
@@ -151,7 +291,7 @@ namespace HammerWorldGenerator
             return world;
         }
 
-        private float[][] GeneratePerlin3DWorld(int seed, int nChunks, int chunkW, int chunkH, int y, int minY, int maxY)
+        private float[][] GeneratePerlin3DWorld(int seed, int nChunks, int chunkW) //, int chunkH, int y, int minY, int maxY) ->  marqué comme inutilisé, à supprimer ou utiliser
         {
             FastNoise myNoise = new FastNoise(); // Create a FastNoise object
                 myNoise.SetSeed(seed);

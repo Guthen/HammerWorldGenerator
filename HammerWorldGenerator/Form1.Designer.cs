@@ -30,45 +30,53 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frame));
             this.gBoxOptions = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gBoxSave = new System.Windows.Forms.GroupBox();
+            this.ButReset = new System.Windows.Forms.Button();
+            this.ButLoad = new System.Windows.Forms.Button();
+            this.ButSave = new System.Windows.Forms.Button();
+            this.labelresult = new System.Windows.Forms.Label();
+            this.coBoxResult = new System.Windows.Forms.ComboBox();
+            this.gBoxPerlin = new System.Windows.Forms.GroupBox();
             this.cBoxNoiseType = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labelnoisetype = new System.Windows.Forms.Label();
+            this.labelgain = new System.Windows.Forms.Label();
             this.nUDownFracGain = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
+            this.labellacunarity = new System.Windows.Forms.Label();
             this.nUDownFracLacunarity = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labeloctaves = new System.Windows.Forms.Label();
             this.nUDownFracOctaves = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelfrequency = new System.Windows.Forms.Label();
             this.coBoxInterp = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelinterpolation = new System.Windows.Forms.Label();
             this.nUDownFrequency = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labeltype = new System.Windows.Forms.Label();
             this.rButPerlin3D = new System.Windows.Forms.RadioButton();
             this.rBut3D = new System.Windows.Forms.RadioButton();
             this.rBut2D = new System.Windows.Forms.RadioButton();
             this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
             this.gBoxMinecraft = new System.Windows.Forms.GroupBox();
             this.ckBoxFullBreakable = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelblocksize = new System.Windows.Forms.Label();
             this.numericUpDownBlockSize = new System.Windows.Forms.NumericUpDown();
             this.ckBoxChunkFill = new System.Windows.Forms.CheckBox();
-            this.lSeed = new System.Windows.Forms.Label();
+            this.labelseed = new System.Windows.Forms.Label();
             this.gBoxChunk = new System.Windows.Forms.GroupBox();
-            this.lHeight = new System.Windows.Forms.Label();
+            this.labelheight = new System.Windows.Forms.Label();
             this.nUDownChunkHeight = new System.Windows.Forms.NumericUpDown();
-            this.lWidth = new System.Windows.Forms.Label();
+            this.labelwidth = new System.Windows.Forms.Label();
             this.nUDownChunkWidth = new System.Windows.Forms.NumericUpDown();
-            this.lOutputPath = new System.Windows.Forms.Label();
+            this.labeloutput = new System.Windows.Forms.Label();
             this.tBoxOutputPath = new System.Windows.Forms.TextBox();
-            this.butGenerate = new System.Windows.Forms.Button();
+            this.ButGenerate = new System.Windows.Forms.Button();
             this.gBoxOutput = new System.Windows.Forms.GroupBox();
             this.pBarFinish = new System.Windows.Forms.ProgressBar();
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
-            this.coBoxResult = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ButReload = new System.Windows.Forms.Button();
             this.gBoxOptions.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gBoxSave.SuspendLayout();
+            this.gBoxPerlin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracGain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracLacunarity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracOctaves)).BeginInit();
@@ -84,16 +92,18 @@
             // 
             // gBoxOptions
             // 
-            this.gBoxOptions.Controls.Add(this.label1);
+            this.gBoxOptions.Controls.Add(this.ButReload);
+            this.gBoxOptions.Controls.Add(this.gBoxSave);
+            this.gBoxOptions.Controls.Add(this.labelresult);
             this.gBoxOptions.Controls.Add(this.coBoxResult);
-            this.gBoxOptions.Controls.Add(this.groupBox1);
-            this.gBoxOptions.Controls.Add(this.label3);
+            this.gBoxOptions.Controls.Add(this.gBoxPerlin);
+            this.gBoxOptions.Controls.Add(this.labeltype);
             this.gBoxOptions.Controls.Add(this.rButPerlin3D);
             this.gBoxOptions.Controls.Add(this.rBut3D);
             this.gBoxOptions.Controls.Add(this.rBut2D);
             this.gBoxOptions.Controls.Add(this.nUDownSeed);
             this.gBoxOptions.Controls.Add(this.gBoxMinecraft);
-            this.gBoxOptions.Controls.Add(this.lSeed);
+            this.gBoxOptions.Controls.Add(this.labelseed);
             this.gBoxOptions.Controls.Add(this.gBoxChunk);
             this.gBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.gBoxOptions.Name = "gBoxOptions";
@@ -102,26 +112,89 @@
             this.gBoxOptions.TabStop = false;
             this.gBoxOptions.Text = "Generator Options";
             // 
-            // groupBox1
+            // gBoxSave
             // 
-            this.groupBox1.Controls.Add(this.cBoxNoiseType);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.nUDownFracGain);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.nUDownFracLacunarity);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.nUDownFracOctaves);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.coBoxInterp);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.nUDownFrequency);
-            this.groupBox1.Location = new System.Drawing.Point(13, 68);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(447, 171);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Perlin Options";
+            this.gBoxSave.Controls.Add(this.ButReset);
+            this.gBoxSave.Controls.Add(this.ButLoad);
+            this.gBoxSave.Controls.Add(this.ButSave);
+            this.gBoxSave.Location = new System.Drawing.Point(207, 246);
+            this.gBoxSave.Name = "gBoxSave";
+            this.gBoxSave.Size = new System.Drawing.Size(253, 197);
+            this.gBoxSave.TabIndex = 23;
+            this.gBoxSave.TabStop = false;
+            this.gBoxSave.Text = "Save Options";
+            // 
+            // ButReset
+            // 
+            this.ButReset.Location = new System.Drawing.Point(10, 77);
+            this.ButReset.Name = "ButReset";
+            this.ButReset.Size = new System.Drawing.Size(139, 23);
+            this.ButReset.TabIndex = 2;
+            this.ButReset.Text = "Reset settings";
+            this.ButReset.UseVisualStyleBackColor = true;
+            this.ButReset.Click += new System.EventHandler(this.ButReset_Click);
+            // 
+            // ButLoad
+            // 
+            this.ButLoad.Location = new System.Drawing.Point(10, 49);
+            this.ButLoad.Name = "ButLoad";
+            this.ButLoad.Size = new System.Drawing.Size(139, 23);
+            this.ButLoad.TabIndex = 1;
+            this.ButLoad.Text = "Load settings";
+            this.ButLoad.UseVisualStyleBackColor = true;
+            this.ButLoad.Click += new System.EventHandler(this.ButLoad_Click);
+            // 
+            // ButSave
+            // 
+            this.ButSave.Location = new System.Drawing.Point(10, 20);
+            this.ButSave.Name = "ButSave";
+            this.ButSave.Size = new System.Drawing.Size(139, 23);
+            this.ButSave.TabIndex = 0;
+            this.ButSave.Text = "Save settings";
+            this.ButSave.UseVisualStyleBackColor = true;
+            this.ButSave.Click += new System.EventHandler(this.ButSave_Click);
+            // 
+            // labelresult
+            // 
+            this.labelresult.AutoSize = true;
+            this.labelresult.Location = new System.Drawing.Point(249, 23);
+            this.labelresult.Name = "labelresult";
+            this.labelresult.Size = new System.Drawing.Size(43, 13);
+            this.labelresult.TabIndex = 22;
+            this.labelresult.Text = "Result :";
+            // 
+            // coBoxResult
+            // 
+            this.coBoxResult.FormattingEnabled = true;
+            this.coBoxResult.Items.AddRange(new object[] {
+            "Minecraft",
+            "Displacement"});
+            this.coBoxResult.Location = new System.Drawing.Point(298, 20);
+            this.coBoxResult.Name = "coBoxResult";
+            this.coBoxResult.Size = new System.Drawing.Size(147, 21);
+            this.coBoxResult.TabIndex = 21;
+            this.coBoxResult.Text = "Displacement";
+            // 
+            // gBoxPerlin
+            // 
+            this.gBoxPerlin.Controls.Add(this.cBoxNoiseType);
+            this.gBoxPerlin.Controls.Add(this.labelnoisetype);
+            this.gBoxPerlin.Controls.Add(this.labelgain);
+            this.gBoxPerlin.Controls.Add(this.nUDownFracGain);
+            this.gBoxPerlin.Controls.Add(this.labellacunarity);
+            this.gBoxPerlin.Controls.Add(this.nUDownFracLacunarity);
+            this.gBoxPerlin.Controls.Add(this.labeloctaves);
+            this.gBoxPerlin.Controls.Add(this.nUDownFracOctaves);
+            this.gBoxPerlin.Controls.Add(this.labelfrequency);
+            this.gBoxPerlin.Controls.Add(this.coBoxInterp);
+            this.gBoxPerlin.Controls.Add(this.labelinterpolation);
+            this.gBoxPerlin.Controls.Add(this.nUDownFrequency);
+            this.gBoxPerlin.Location = new System.Drawing.Point(13, 68);
+            this.gBoxPerlin.Name = "gBoxPerlin";
+            this.gBoxPerlin.Size = new System.Drawing.Size(447, 171);
+            this.gBoxPerlin.TabIndex = 12;
+            this.gBoxPerlin.TabStop = false;
+            this.gBoxPerlin.Text = "Perlin Options";
             // 
             // cBoxNoiseType
             // 
@@ -143,23 +216,23 @@
             this.cBoxNoiseType.TabIndex = 20;
             this.cBoxNoiseType.Text = "Perlin Fractal";
             // 
-            // label10
+            // labelnoisetype
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(30, 52);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Noise Type :";
+            this.labelnoisetype.AutoSize = true;
+            this.labelnoisetype.Location = new System.Drawing.Point(30, 52);
+            this.labelnoisetype.Name = "labelnoisetype";
+            this.labelnoisetype.Size = new System.Drawing.Size(67, 13);
+            this.labelnoisetype.TabIndex = 19;
+            this.labelnoisetype.Text = "Noise Type :";
             // 
-            // label9
+            // labelgain
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 139);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 13);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Fractal Gain :";
+            this.labelgain.AutoSize = true;
+            this.labelgain.Location = new System.Drawing.Point(30, 139);
+            this.labelgain.Name = "labelgain";
+            this.labelgain.Size = new System.Drawing.Size(70, 13);
+            this.labelgain.TabIndex = 18;
+            this.labelgain.Text = "Fractal Gain :";
             // 
             // nUDownFracGain
             // 
@@ -185,14 +258,14 @@
             0,
             65536});
             // 
-            // label8
+            // labellacunarity
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 113);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Fractal Lacunarity :";
+            this.labellacunarity.AutoSize = true;
+            this.labellacunarity.Location = new System.Drawing.Point(4, 113);
+            this.labellacunarity.Name = "labellacunarity";
+            this.labellacunarity.Size = new System.Drawing.Size(97, 13);
+            this.labellacunarity.TabIndex = 16;
+            this.labellacunarity.Text = "Fractal Lacunarity :";
             // 
             // nUDownFracLacunarity
             // 
@@ -223,14 +296,14 @@
             0,
             0});
             // 
-            // label7
+            // labeloctaves
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 87);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Fractal Octaves :";
+            this.labeloctaves.AutoSize = true;
+            this.labeloctaves.Location = new System.Drawing.Point(13, 87);
+            this.labeloctaves.Name = "labeloctaves";
+            this.labeloctaves.Size = new System.Drawing.Size(88, 13);
+            this.labeloctaves.TabIndex = 14;
+            this.labeloctaves.Text = "Fractal Octaves :";
             // 
             // nUDownFracOctaves
             // 
@@ -255,14 +328,14 @@
             0,
             0});
             // 
-            // label6
+            // labelfrequency
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(295, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Frequency :";
+            this.labelfrequency.AutoSize = true;
+            this.labelfrequency.Location = new System.Drawing.Point(295, 25);
+            this.labelfrequency.Name = "labelfrequency";
+            this.labelfrequency.Size = new System.Drawing.Size(63, 13);
+            this.labelfrequency.TabIndex = 12;
+            this.labelfrequency.Text = "Frequency :";
             // 
             // coBoxInterp
             // 
@@ -277,14 +350,14 @@
             this.coBoxInterp.TabIndex = 9;
             this.coBoxInterp.Text = "Quintic";
             // 
-            // label4
+            // labelinterpolation
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Interpolation :";
+            this.labelinterpolation.AutoSize = true;
+            this.labelinterpolation.Location = new System.Drawing.Point(30, 25);
+            this.labelinterpolation.Name = "labelinterpolation";
+            this.labelinterpolation.Size = new System.Drawing.Size(71, 13);
+            this.labelinterpolation.TabIndex = 8;
+            this.labelinterpolation.Text = "Interpolation :";
             // 
             // nUDownFrequency
             // 
@@ -310,14 +383,14 @@
             0,
             131072});
             // 
-            // label3
+            // labeltype
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Type :";
+            this.labeltype.AutoSize = true;
+            this.labeltype.Location = new System.Drawing.Point(14, 47);
+            this.labeltype.Name = "labeltype";
+            this.labeltype.Size = new System.Drawing.Size(37, 13);
+            this.labeltype.TabIndex = 11;
+            this.labeltype.Text = "Type :";
             // 
             // rButPerlin3D
             // 
@@ -361,18 +434,18 @@
             5421010,
             0});
             this.nUDownSeed.Name = "nUDownSeed";
-            this.nUDownSeed.Size = new System.Drawing.Size(164, 20);
+            this.nUDownSeed.Size = new System.Drawing.Size(104, 20);
             this.nUDownSeed.TabIndex = 5;
             // 
             // gBoxMinecraft
             // 
             this.gBoxMinecraft.Controls.Add(this.ckBoxFullBreakable);
-            this.gBoxMinecraft.Controls.Add(this.label2);
+            this.gBoxMinecraft.Controls.Add(this.labelblocksize);
             this.gBoxMinecraft.Controls.Add(this.numericUpDownBlockSize);
             this.gBoxMinecraft.Controls.Add(this.ckBoxChunkFill);
-            this.gBoxMinecraft.Location = new System.Drawing.Point(279, 367);
+            this.gBoxMinecraft.Location = new System.Drawing.Point(13, 353);
             this.gBoxMinecraft.Name = "gBoxMinecraft";
-            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 76);
+            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 90);
             this.gBoxMinecraft.TabIndex = 7;
             this.gBoxMinecraft.TabStop = false;
             this.gBoxMinecraft.Text = "Minecraft Options";
@@ -387,14 +460,14 @@
             this.ckBoxFullBreakable.Text = "Full breakable";
             this.ckBoxFullBreakable.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // labelblocksize
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Block Size :";
+            this.labelblocksize.AutoSize = true;
+            this.labelblocksize.Location = new System.Drawing.Point(6, 22);
+            this.labelblocksize.Name = "labelblocksize";
+            this.labelblocksize.Size = new System.Drawing.Size(63, 13);
+            this.labelblocksize.TabIndex = 5;
+            this.labelblocksize.Text = "Block Size :";
             // 
             // numericUpDownBlockSize
             // 
@@ -403,7 +476,7 @@
             this.numericUpDownBlockSize.Size = new System.Drawing.Size(68, 20);
             this.numericUpDownBlockSize.TabIndex = 4;
             this.numericUpDownBlockSize.Value = new decimal(new int[] {
-            64,
+            40,
             0,
             0,
             0});
@@ -418,36 +491,36 @@
             this.ckBoxChunkFill.Text = "Fill Bottom";
             this.ckBoxChunkFill.UseVisualStyleBackColor = true;
             // 
-            // lSeed
+            // labelseed
             // 
-            this.lSeed.AutoSize = true;
-            this.lSeed.Location = new System.Drawing.Point(13, 22);
-            this.lSeed.Name = "lSeed";
-            this.lSeed.Size = new System.Drawing.Size(38, 13);
-            this.lSeed.TabIndex = 6;
-            this.lSeed.Text = "Seed :";
+            this.labelseed.AutoSize = true;
+            this.labelseed.Location = new System.Drawing.Point(13, 22);
+            this.labelseed.Name = "labelseed";
+            this.labelseed.Size = new System.Drawing.Size(38, 13);
+            this.labelseed.TabIndex = 6;
+            this.labelseed.Text = "Seed :";
             // 
             // gBoxChunk
             // 
-            this.gBoxChunk.Controls.Add(this.lHeight);
+            this.gBoxChunk.Controls.Add(this.labelheight);
             this.gBoxChunk.Controls.Add(this.nUDownChunkHeight);
-            this.gBoxChunk.Controls.Add(this.lWidth);
+            this.gBoxChunk.Controls.Add(this.labelwidth);
             this.gBoxChunk.Controls.Add(this.nUDownChunkWidth);
             this.gBoxChunk.Location = new System.Drawing.Point(13, 245);
             this.gBoxChunk.Name = "gBoxChunk";
-            this.gBoxChunk.Size = new System.Drawing.Size(260, 198);
+            this.gBoxChunk.Size = new System.Drawing.Size(187, 102);
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
             this.gBoxChunk.Text = "Chunk Options";
             // 
-            // lHeight
+            // labelheight
             // 
-            this.lHeight.AutoSize = true;
-            this.lHeight.Location = new System.Drawing.Point(6, 47);
-            this.lHeight.Name = "lHeight";
-            this.lHeight.Size = new System.Drawing.Size(44, 13);
-            this.lHeight.TabIndex = 3;
-            this.lHeight.Text = "Height :";
+            this.labelheight.AutoSize = true;
+            this.labelheight.Location = new System.Drawing.Point(6, 47);
+            this.labelheight.Name = "labelheight";
+            this.labelheight.Size = new System.Drawing.Size(44, 13);
+            this.labelheight.TabIndex = 3;
+            this.labelheight.Text = "Height :";
             // 
             // nUDownChunkHeight
             // 
@@ -471,14 +544,14 @@
             0,
             0});
             // 
-            // lWidth
+            // labelwidth
             // 
-            this.lWidth.AutoSize = true;
-            this.lWidth.Location = new System.Drawing.Point(9, 21);
-            this.lWidth.Name = "lWidth";
-            this.lWidth.Size = new System.Drawing.Size(41, 13);
-            this.lWidth.TabIndex = 1;
-            this.lWidth.Text = "Width :";
+            this.labelwidth.AutoSize = true;
+            this.labelwidth.Location = new System.Drawing.Point(9, 21);
+            this.labelwidth.Name = "labelwidth";
+            this.labelwidth.Size = new System.Drawing.Size(41, 13);
+            this.labelwidth.TabIndex = 1;
+            this.labelwidth.Text = "Width :";
             // 
             // nUDownChunkWidth
             // 
@@ -502,14 +575,14 @@
             0,
             0});
             // 
-            // lOutputPath
+            // labeloutput
             // 
-            this.lOutputPath.AutoSize = true;
-            this.lOutputPath.Location = new System.Drawing.Point(6, 22);
-            this.lOutputPath.Name = "lOutputPath";
-            this.lOutputPath.Size = new System.Drawing.Size(45, 13);
-            this.lOutputPath.TabIndex = 9;
-            this.lOutputPath.Text = "Output :";
+            this.labeloutput.AutoSize = true;
+            this.labeloutput.Location = new System.Drawing.Point(6, 22);
+            this.labeloutput.Name = "labeloutput";
+            this.labeloutput.Size = new System.Drawing.Size(45, 13);
+            this.labeloutput.TabIndex = 9;
+            this.labeloutput.Text = "Output :";
             // 
             // tBoxOutputPath
             // 
@@ -519,21 +592,21 @@
             this.tBoxOutputPath.TabIndex = 8;
             this.tBoxOutputPath.Text = "C:\\Users\\NAME\\Desktop\\generatemap.vmf";
             // 
-            // butGenerate
+            // ButGenerate
             // 
-            this.butGenerate.Location = new System.Drawing.Point(317, 17);
-            this.butGenerate.Name = "butGenerate";
-            this.butGenerate.Size = new System.Drawing.Size(98, 23);
-            this.butGenerate.TabIndex = 1;
-            this.butGenerate.Text = "Generate";
-            this.butGenerate.UseVisualStyleBackColor = true;
-            this.butGenerate.Click += new System.EventHandler(this.butGenerate_Click);
+            this.ButGenerate.Location = new System.Drawing.Point(317, 17);
+            this.ButGenerate.Name = "ButGenerate";
+            this.ButGenerate.Size = new System.Drawing.Size(98, 23);
+            this.ButGenerate.TabIndex = 1;
+            this.ButGenerate.Text = "Generate";
+            this.ButGenerate.UseVisualStyleBackColor = true;
+            this.ButGenerate.Click += new System.EventHandler(this.ButGenerate_Click);
             // 
             // gBoxOutput
             // 
             this.gBoxOutput.Controls.Add(this.pBarFinish);
-            this.gBoxOutput.Controls.Add(this.butGenerate);
-            this.gBoxOutput.Controls.Add(this.lOutputPath);
+            this.gBoxOutput.Controls.Add(this.ButGenerate);
+            this.gBoxOutput.Controls.Add(this.labeloutput);
             this.gBoxOutput.Controls.Add(this.tBoxOutputPath);
             this.gBoxOutput.Location = new System.Drawing.Point(490, 12);
             this.gBoxOutput.Name = "gBoxOutput";
@@ -558,26 +631,19 @@
             this.OutputTextBox.TabIndex = 2;
             this.OutputTextBox.Text = "";
             // 
-            // coBoxResult
+            // openFileDialog1
             // 
-            this.coBoxResult.FormattingEnabled = true;
-            this.coBoxResult.Items.AddRange(new object[] {
-            "Minecraft",
-            "Displacement"});
-            this.coBoxResult.Location = new System.Drawing.Point(298, 20);
-            this.coBoxResult.Name = "coBoxResult";
-            this.coBoxResult.Size = new System.Drawing.Size(147, 21);
-            this.coBoxResult.TabIndex = 21;
-            this.coBoxResult.Text = "Displacement";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label1
+            // ButReload
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(249, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Result :";
+            this.ButReload.Location = new System.Drawing.Point(167, 18);
+            this.ButReload.Name = "ButReload";
+            this.ButReload.Size = new System.Drawing.Size(54, 23);
+            this.ButReload.TabIndex = 24;
+            this.ButReload.Text = "Reload";
+            this.ButReload.UseVisualStyleBackColor = true;
+            this.ButReload.Click += new System.EventHandler(this.ButReload_Click);
             // 
             // Frame
             // 
@@ -595,8 +661,9 @@
             this.Text = "Hammer World Generator";
             this.gBoxOptions.ResumeLayout(false);
             this.gBoxOptions.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gBoxSave.ResumeLayout(false);
+            this.gBoxPerlin.ResumeLayout(false);
+            this.gBoxPerlin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracGain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracLacunarity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracOctaves)).EndInit();
@@ -618,45 +685,52 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gBoxOptions;
-        private System.Windows.Forms.Button butGenerate;
+        private System.Windows.Forms.Button ButGenerate;
         private System.Windows.Forms.GroupBox gBoxOutput;
         private System.Windows.Forms.GroupBox gBoxChunk;
         private System.Windows.Forms.CheckBox ckBoxChunkFill;
-        private System.Windows.Forms.Label lHeight;
+        private System.Windows.Forms.Label labelheight;
         private System.Windows.Forms.NumericUpDown nUDownChunkHeight;
-        private System.Windows.Forms.Label lWidth;
+        private System.Windows.Forms.Label labelwidth;
         private System.Windows.Forms.NumericUpDown nUDownChunkWidth;
-        private System.Windows.Forms.Label lSeed;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelseed;
+        private System.Windows.Forms.Label labelblocksize;
         private System.Windows.Forms.NumericUpDown numericUpDownBlockSize;
         private System.Windows.Forms.GroupBox gBoxMinecraft;
-        private System.Windows.Forms.Label lOutputPath;
+        private System.Windows.Forms.Label labeloutput;
         private System.Windows.Forms.TextBox tBoxOutputPath;
         private System.Windows.Forms.CheckBox ckBoxFullBreakable;
         private System.Windows.Forms.NumericUpDown nUDownSeed;
         private System.Windows.Forms.RichTextBox OutputTextBox;
         private System.Windows.Forms.RadioButton rBut3D;
         private System.Windows.Forms.RadioButton rBut2D;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labeltype;
         private System.Windows.Forms.RadioButton rButPerlin3D;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelinterpolation;
+        private System.Windows.Forms.Label labelfrequency;
         private System.Windows.Forms.NumericUpDown nUDownFrequency;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nUDownMaxY;
         private System.Windows.Forms.ProgressBar pBarFinish;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gBoxPerlin;
         private System.Windows.Forms.ComboBox coBoxInterp;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labeloctaves;
         private System.Windows.Forms.NumericUpDown nUDownFracOctaves;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelgain;
         private System.Windows.Forms.NumericUpDown nUDownFracGain;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labellacunarity;
         private System.Windows.Forms.NumericUpDown nUDownFracLacunarity;
         private System.Windows.Forms.ComboBox cBoxNoiseType;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelnoisetype;
+        private System.Windows.Forms.Label labelresult;
         private System.Windows.Forms.ComboBox coBoxResult;
+        private System.Windows.Forms.GroupBox gBoxSave;
+        private System.Windows.Forms.Button ButLoad;
+        private System.Windows.Forms.Button ButSave;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button ButReset;
+        private System.Windows.Forms.Button ButReload;
     }
 }
 
