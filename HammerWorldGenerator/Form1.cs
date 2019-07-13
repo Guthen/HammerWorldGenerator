@@ -97,21 +97,25 @@ namespace HammerWorldGenerator
             }
             else
             {
-                var w = Convert.ToInt32(nUDownChunkWidth.Value);
-                if ( w * w > HammerBrushLimit )
+                if (coBoxResult.Text == "Minecraft")
                 {
-                    var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée ("+HammerBrushLimit+") si vous générer " + w * w + " brushs ! Souhaitez-vous continuer ?",
-                                  "Warning", MessageBoxButtons.YesNo,
-                                  MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-
-                    if (result == DialogResult.No)
+                    var w = Convert.ToInt32(nUDownChunkWidth.Value);
+                    if (w * w > HammerBrushLimit)
                     {
-                        return;
+                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générer " + w * w + " brushs ! Souhaitez-vous continuer ?",
+                                      "Warning", MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
                     }
+
+                    var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
+                    ConvertPerlin3DWorldToVmf(hMap, breakable);
                 }
 
-                var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
-                ConvertPerlin3DWorldToVmf(hMap, breakable);
             }
 
             save += "cameras\r\n{\r\n\t\"activecamera\" \"-1\"\r\n}\r\ncordon\r\n{\t\"mins\" \"(-1024 -1024 -1024)\"\r\n\t\"maxs\" \"(1024 1024 1024)\"\r\n\t\"active\" \"0\"\r\n}\r\n";
