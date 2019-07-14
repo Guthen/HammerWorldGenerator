@@ -601,6 +601,8 @@ namespace HammerWorldGenerator
             var i = 0;
             var max = world.Length * world[0].Length;
 
+            bloctype = coBoxSurface.Text.ToLower();
+
             string output = "world = {\n";
             for (int x = 0; x < world.Length; x++)
             {
@@ -622,14 +624,6 @@ namespace HammerWorldGenerator
 
                     //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
 
-                    if (z == Convert.ToInt32( nUDownChunkHeight.Value ) - 1)
-                    {
-                        bloctype = "";
-                    }
-                    else
-                    {
-                        bloctype = "grass";
-                    }
                     CreateBloc(bloctype, breakable, position, size);
                     i++;
                 }
@@ -649,7 +643,7 @@ namespace HammerWorldGenerator
 
         private void ConvertDispPerlin3DWorldToVmf(float[][] world, bool breakable)
         {
-            string bloctype;
+            string bloctype = "grass";
 
             if (breakable == true)
             {
@@ -658,6 +652,8 @@ namespace HammerWorldGenerator
 
             var i = 0;
             var max = world.Length * world[0].Length;
+
+            Console.WriteLine("BlocType: " + bloctype);
 
             string output = "world = {\n";
             for (int x = 0; x < world.Length; x++)
@@ -680,14 +676,6 @@ namespace HammerWorldGenerator
 
                     //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
 
-                    if (z == Convert.ToInt32(nUDownChunkHeight.Value) - 1)
-                    {
-                        bloctype = "";
-                    }
-                    else
-                    {
-                        bloctype = "grass";
-                    }
                     CreateDisp(position, size);
                     i++;
                 }
