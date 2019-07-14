@@ -21,6 +21,7 @@ namespace HammerWorldGenerator
 
         string save = "";
         string bloc = "";
+        string disp = "";
         string savetype = "";
 
         string materialtop = "MC/BEDROCK";
@@ -201,8 +202,10 @@ namespace HammerWorldGenerator
             planeid = 0;
 
             bool breakable = ckBoxFullBreakable.Checked;
+            decimal grid;
 
-            save = comment + "versioninfo\r\n{\r\n\t\"editorversion\" \"400\"\r\n\t\"editorbuild\" \"8261\"\r\n\t\"mapversion\" \"1\"\r\n\t\"formatversion\" \"100\"\r\n\t\"prefab\" \"0\"\r\n}\r\nvisgroups\r\n{\r\n}\r\nviewsettings\r\n{\r\n\t\"bSnapToGrid\" \"1\"\r\n\t\"bShowGrid\" \"1\"\r\n\t\"bShowLogicalGrid\" \"0\"\r\n\t\"nGridSpacing\" \"" + numericUpDownBlockSize.Value + "\"\r\n\t\"bShow3DGrid\" \"0\"\r\n}\r\nworld\r\n{\r\n\t\"id\" \"1\"\r\n\t\"mapversion\" \"1\"\r\n\t\"classname\" \"worldspawn\"\r\n\t\"detailmaterial\" \"detail/detailsprites\"\r\n\t\"detailvbsp\" \"detail.vbsp\"\r\n\t\"maxpropscreenwidth\" \"-1\"\r\n\t\"skyname\" \"minecraft_sky_\"\r\n\t\"vmf file created with\" \"Hammer World Generator\"\r\n";
+            if (coBoxResult.Text == "Minecraft"){grid = numericUpDownBlockSize.Value;}else{grid = 64;}
+            save = comment + "versioninfo\r\n{\r\n\t\"editorversion\" \"400\"\r\n\t\"editorbuild\" \"8261\"\r\n\t\"mapversion\" \"1\"\r\n\t\"formatversion\" \"100\"\r\n\t\"prefab\" \"0\"\r\n}\r\nvisgroups\r\n{\r\n}\r\nviewsettings\r\n{\r\n\t\"bSnapToGrid\" \"1\"\r\n\t\"bShowGrid\" \"1\"\r\n\t\"bShowLogicalGrid\" \"0\"\r\n\t\"nGridSpacing\" \"" + grid + "\"\r\n\t\"bShow3DGrid\" \"0\"\r\n}\r\nworld\r\n{\r\n\t\"id\" \"1\"\r\n\t\"mapversion\" \"1\"\r\n\t\"classname\" \"worldspawn\"\r\n\t\"detailmaterial\" \"detail/detailsprites\"\r\n\t\"detailvbsp\" \"detail.vbsp\"\r\n\t\"maxpropscreenwidth\" \"-1\"\r\n\t\"skyname\" \"minecraft_sky_\"\r\n\t\"vmf file created with\" \"Hammer World Generator\"\r\n";
 
             if (rBut2D.Checked) // 2d stuff
             {
@@ -255,14 +258,32 @@ namespace HammerWorldGenerator
                     var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
                     ConvertPerlin3DWorldToVmf(hMap, breakable);
                 }
+                else if (coBoxResult.Text == "Displacement")
+                {
+                    var w = Convert.ToInt32(nUDownChunkWidth.Value);
+                    if (w * w > HammerBrushLimit)
+                    {
+                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générez " + w * w + " brushs ! Souhaitez-vous continuer ?",
+                                      "Warning", MessageBoxButtons.YesNo,
+                                      MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+
+                    var hMap = GenerateDispPerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
+                    ConvertDispPerlin3DWorldToVmf(hMap, breakable);
+                }
 
             }
 
             save += "cameras\r\n{\r\n\t\"activecamera\" \"-1\"\r\n}\r\ncordon\r\n{\t\"mins\" \"(-1024 -1024 -1024)\"\r\n\t\"maxs\" \"(1024 1024 1024)\"\r\n\t\"active\" \"0\"\r\n}\r\n";
 
             StreamWriter sw = new StreamWriter(tBoxOutputPath.Text);
-                        sw.Write(save);
-                        sw.Close();
+                sw.Write(save);
+                sw.Close();
 
             MessageBox.Show(this, "Succesfully generated the vmf file ! Saved in " + tBoxOutputPath.Text,
                                       "Notification", MessageBoxButtons.OK,
@@ -360,6 +381,74 @@ namespace HammerWorldGenerator
             return heightMap;
         }
 
+        private float[][] GenerateDispPerlin3DWorld(int seed, int nChunks, int chunkW) //, int chunkH, int y, int minY, int maxY) ->  marqué comme inutilisé, à supprimer ou utiliser
+        {
+            FastNoise myNoise = new FastNoise(); // Create a FastNoise object
+            myNoise.SetSeed(seed);
+            myNoise.SetFrequency((float)nUDownFrequency.Value);
+            myNoise.SetFractalGain((float)nUDownFracGain.Value);
+            myNoise.SetFractalLacunarity((float)nUDownFracLacunarity.Value);
+            myNoise.SetFractalOctaves(Convert.ToInt32(nUDownFracOctaves.Value));
+
+            switch (cBoxNoiseType.Text)
+            {
+                case "Perlin":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.Perlin); // Set the desired noise type
+                    break;
+                case "Cubic":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.Cubic); // Set the desired noise type
+                    break;
+                case "Cubic Fractal":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.CubicFractal); // Set the desired noise type
+                    break;
+                case "Simplex":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.Simplex); // Set the desired noise type
+                    break;
+                case "Simplex Fractal":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.SimplexFractal); // Set the desired noise type
+                    break;
+                case "Cellular":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.Cellular); // Set the desired noise type
+                    break;
+                case "White Noise":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.WhiteNoise); // Set the desired noise type
+                    break;
+                case "Value":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.Value); // Set the desired noise type
+                    break;
+                case "Value Fractal":
+                    myNoise.SetNoiseType(FastNoise.NoiseType.ValueFractal); // Set the desired noise type
+                    break;
+                default:
+                    myNoise.SetNoiseType(FastNoise.NoiseType.PerlinFractal); // Set the desired noise type
+                    break;
+            }
+
+            switch (coBoxInterp.Text)
+            {
+                case "Hermite":
+                    myNoise.SetInterp(FastNoise.Interp.Hermite);
+                    break;
+                case "Linear":
+                    myNoise.SetInterp(FastNoise.Interp.Linear);
+                    break;
+                default:
+                    myNoise.SetInterp(FastNoise.Interp.Quintic);
+                    break;
+            }
+
+            float[][] heightMap = new float[chunkW * nChunks][]; // 2D heightmap to create terrain
+            for (int _x = 0; _x < chunkW * nChunks; _x++)
+            {
+                heightMap[_x] = new float[chunkW * nChunks];
+                for (int _y = 0; _y < chunkW * nChunks; _y++)
+                {
+                    heightMap[_x][_y] = myNoise.GetNoise(_x, _y);
+                }
+            }
+
+            return heightMap;
+        }
         private void Convert2DWorldToVmf( int[][][] world, bool breakable )
         {
             string bloctype;
@@ -468,8 +557,14 @@ namespace HammerWorldGenerator
                                     bloctype = "";
                                     break;
                             }
-
-                            CreateBloc(bloctype, breakable, position, size);
+                            if (coBoxResult.Text == "Minecraft")
+                            {
+                                CreateBloc(bloctype, breakable, position, size);
+                            }
+                            else if (coBoxResult.Text == "Displacement")
+                            {
+                                CreateDisp(position, size);
+                            }
                         }
                         output += " },\n";
                     }
@@ -528,7 +623,6 @@ namespace HammerWorldGenerator
                     {
                         bloctype = "grass";
                     }
-
                     CreateBloc(bloctype, breakable, position, size);
                     i++;
                 }
@@ -544,6 +638,83 @@ namespace HammerWorldGenerator
             {
                 save += "}\r\n";
             }
+        }
+
+        private void ConvertDispPerlin3DWorldToVmf(float[][] world, bool breakable)
+        {
+            string bloctype;
+
+            if (breakable == true)
+            {
+                save += "}\r\n";
+            }
+
+            var i = 0;
+            var max = world.Length * world[0].Length;
+
+            string output = "world = {\n";
+            for (int x = 0; x < world.Length; x++)
+            {
+                output += "\t\t[" + x + "] = { ";
+                for (int y = 0; y < world[x].Length; y++)
+                {
+                    var p = i / (max) * 100;
+                    pBarFinish.Value = p;
+
+                    Console.WriteLine("i: " + i + "#w*#w: " + world.Length * world[x].Length + " p: " + p);
+
+                    var z = Math.Round(world[x][y] * 10);
+                    output += z + ", ";
+
+                    // get position & size
+                    var s = nUDownDispSize.Value;
+                    var position = new decimal[3] { x * s, y * s, Convert.ToDecimal(z) * s };
+                    var size = new decimal[3] { s, s, s };
+
+                    //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
+
+                    if (z == Convert.ToInt32(nUDownChunkHeight.Value) - 1)
+                    {
+                        bloctype = "";
+                    }
+                    else
+                    {
+                        bloctype = "grass";
+                    }
+                    CreateDisp(position, size);
+                    i++;
+                }
+                output += " },\n";
+                i++;
+            }
+            output += "\t},\n";
+            output += "}";
+
+            OutputTextBox.Text = output;
+
+            if (breakable == false)
+            {
+                save += "}\r\n";
+            }
+        }
+
+        private void CreateDisp(decimal[] posVec, decimal[] sizeVec)
+        {
+            decimal x = posVec[0]; //
+            decimal y = posVec[1]; // positions
+            decimal z = posVec[2]; //
+
+            decimal xs = x + sizeVec[0]; //
+            decimal ys = y + sizeVec[1]; // size positions
+            decimal zs = z + sizeVec[2]; //
+
+            string dispbase = "\tsolid\r\n\t{15}\r\n\t\t\"id\" \"{0}\"\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {3} {7}) ({2} {6} {7}) ({5} {6} {7})\"\r\n\t\t\t\"material\" \"MC/GRASS\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t\tdispinfo\r\n\t\t\t{15}\r\n\t\t\t\t\"power\" \"3\"\r\n\t\t\t\t\"startposition\" \"[0 0 256]\"\r\n\t\t\t\t\"flags\" \"0\"\r\n\t\t\t\t\"elevation\" \"0\"\r\n\t\t\t\t\"subdiv\" \"0\"\r\n\t\t\t\tnormals\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row1\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row2\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row3\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row4\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row5\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row6\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row7\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row8\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t{16}\r\n\t\t\t\tdistances\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row1\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row2\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row3\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row4\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row5\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row6\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row7\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row8\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t{16}\r\n\t\t\t\toffsets\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row1\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row2\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row3\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row4\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row5\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row6\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row7\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row8\" \"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t{16}\r\n\t\t\t\toffset_normals\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row1\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row2\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row3\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row4\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row5\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row6\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row7\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t\t\"row8\" \"0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1\"\r\n\t\t\t\t{16}\r\n\t\t\t\talphas\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row1\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row2\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row3\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row4\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row5\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row6\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row7\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t\t\"row8\" \"0 0 0 0 0 0 0 0 0\"\r\n\t\t\t\t{16}\r\n\t\t\t\ttriangle_tags\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"row0\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row1\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row2\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row3\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row4\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row5\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row6\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t\t\"row7\" \"9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\"\r\n\t\t\t\t{16}\r\n\t\t\t\tallowed_verts\r\n\t\t\t\t{15}\r\n\t\t\t\t\t\"10\" \"-1 -1 -1 -1 -1 -1 -1 -1 -1 -1\"\r\n\t\t\t\t{16}\r\n\t\t\t{16}\r\n\t\t{16}\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {6} {4}) ({2} {3} {4}) ({5} {3} {4})\"\r\n\t\t\t\"material\" \"MC/DIRT\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 -1 0 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {3} {4}) ({2} {6} {4}) ({2} {6} {7})\"\r\n\t\t\t\"material\" \"MC/DIRT\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({5} {6} {4}) ({5} {3} {4}) ({5} {3} {7})\"\r\n\t\t\t\"material\" \"MC/DIRT\"\r\n\t\t\t\"uaxis\" \"[0 1 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({2} {6} {4}) ({5} {6} {4}) ({5} {6} {7})\"\r\n\t\t\t\"material\" \"MC/DIRT\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\tside\r\n\t\t{15}\r\n\t\t\t\"id\" \"{1}\"\r\n\t\t\t\"plane\" \"({5} {3} {4}) ({2} {3} {4}) ({2} {3} {7})\"\r\n\t\t\t\"material\" \"MC/DIRT\"\r\n\t\t\t\"uaxis\" \"[1 0 0 0] 0.5\"\r\n\t\t\t\"vaxis\" \"[0 0 -1 0] 0.5\"\r\n\t\t\t\"rotation\" \"0\"\r\n\t\t\t\"lightmapscale\" \"16\"\r\n\t\t\t\"smoothing_groups\" \"0\"\r\n\t\t{16}\r\n\t\teditor\r\n\t\t{15}\r\n\t\t\t\"color\" \"0 122 223\"\r\n\t\t\t\"visgroupshown\" \"1\"\r\n\t\t\t\"visgroupautoshown\" \"1\"\r\n\t\t{16}\r\n\t{16}\r\n";
+            //bloc = String.Format(blocbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
+            //                                  0         1        2  3  4  5   6   7        8             9            10                11           12              13           14          15   16
+
+            disp = string.Format(dispbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}");
+            
+            save += disp;
         }
 
         // CreateBloc( blockType, breakable, posVec, sizeVec );

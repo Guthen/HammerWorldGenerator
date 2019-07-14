@@ -74,6 +74,9 @@
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.gBoxDisp = new System.Windows.Forms.GroupBox();
+            this.nUDownDispSize = new System.Windows.Forms.NumericUpDown();
+            this.labeldispsize = new System.Windows.Forms.Label();
             this.gBoxOptions.SuspendLayout();
             this.gBoxSave.SuspendLayout();
             this.gBoxPerlin.SuspendLayout();
@@ -88,10 +91,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).BeginInit();
             this.gBoxOutput.SuspendLayout();
+            this.gBoxDisp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownDispSize)).BeginInit();
             this.SuspendLayout();
             // 
             // gBoxOptions
             // 
+            this.gBoxOptions.Controls.Add(this.gBoxDisp);
             this.gBoxOptions.Controls.Add(this.ButReload);
             this.gBoxOptions.Controls.Add(this.gBoxSave);
             this.gBoxOptions.Controls.Add(this.labelresult);
@@ -127,9 +133,9 @@
             this.gBoxSave.Controls.Add(this.ButReset);
             this.gBoxSave.Controls.Add(this.ButLoad);
             this.gBoxSave.Controls.Add(this.ButSave);
-            this.gBoxSave.Location = new System.Drawing.Point(207, 246);
+            this.gBoxSave.Location = new System.Drawing.Point(207, 339);
             this.gBoxSave.Name = "gBoxSave";
-            this.gBoxSave.Size = new System.Drawing.Size(253, 197);
+            this.gBoxSave.Size = new System.Drawing.Size(253, 104);
             this.gBoxSave.TabIndex = 23;
             this.gBoxSave.TabStop = false;
             this.gBoxSave.Text = "Save Options";
@@ -453,7 +459,7 @@
             this.gBoxMinecraft.Controls.Add(this.labelblocksize);
             this.gBoxMinecraft.Controls.Add(this.numericUpDownBlockSize);
             this.gBoxMinecraft.Controls.Add(this.ckBoxChunkFill);
-            this.gBoxMinecraft.Location = new System.Drawing.Point(13, 353);
+            this.gBoxMinecraft.Location = new System.Drawing.Point(273, 243);
             this.gBoxMinecraft.Name = "gBoxMinecraft";
             this.gBoxMinecraft.Size = new System.Drawing.Size(187, 90);
             this.gBoxMinecraft.TabIndex = 7;
@@ -516,9 +522,9 @@
             this.gBoxChunk.Controls.Add(this.nUDownChunkHeight);
             this.gBoxChunk.Controls.Add(this.labelwidth);
             this.gBoxChunk.Controls.Add(this.nUDownChunkWidth);
-            this.gBoxChunk.Location = new System.Drawing.Point(13, 245);
+            this.gBoxChunk.Location = new System.Drawing.Point(13, 339);
             this.gBoxChunk.Name = "gBoxChunk";
-            this.gBoxChunk.Size = new System.Drawing.Size(187, 102);
+            this.gBoxChunk.Size = new System.Drawing.Size(180, 104);
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
             this.gBoxChunk.Text = "Chunk Options";
@@ -635,8 +641,10 @@
             // 
             // OutputTextBox
             // 
+            this.OutputTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.OutputTextBox.Location = new System.Drawing.Point(496, 93);
             this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.Size = new System.Drawing.Size(409, 362);
             this.OutputTextBox.TabIndex = 2;
             this.OutputTextBox.Text = "";
@@ -644,6 +652,53 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // gBoxDisp
+            // 
+            this.gBoxDisp.Controls.Add(this.labeldispsize);
+            this.gBoxDisp.Controls.Add(this.nUDownDispSize);
+            this.gBoxDisp.Location = new System.Drawing.Point(13, 243);
+            this.gBoxDisp.Name = "gBoxDisp";
+            this.gBoxDisp.Size = new System.Drawing.Size(254, 90);
+            this.gBoxDisp.TabIndex = 25;
+            this.gBoxDisp.TabStop = false;
+            this.gBoxDisp.Text = "Displacement Options";
+            // 
+            // nUDownDispSize
+            // 
+            this.nUDownDispSize.Increment = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Location = new System.Drawing.Point(112, 19);
+            this.nUDownDispSize.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Minimum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Name = "nUDownDispSize";
+            this.nUDownDispSize.Size = new System.Drawing.Size(68, 20);
+            this.nUDownDispSize.TabIndex = 0;
+            this.nUDownDispSize.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // labeldispsize
+            // 
+            this.labeldispsize.AutoSize = true;
+            this.labeldispsize.Location = new System.Drawing.Point(9, 21);
+            this.labeldispsize.Name = "labeldispsize";
+            this.labeldispsize.Size = new System.Drawing.Size(100, 13);
+            this.labeldispsize.TabIndex = 1;
+            this.labeldispsize.Text = "Displacement Size :";
             // 
             // Frame
             // 
@@ -682,6 +737,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).EndInit();
             this.gBoxOutput.ResumeLayout(false);
             this.gBoxOutput.PerformLayout();
+            this.gBoxDisp.ResumeLayout(false);
+            this.gBoxDisp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownDispSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -735,6 +793,9 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button ButReset;
         private System.Windows.Forms.Button ButReload;
+        private System.Windows.Forms.GroupBox gBoxDisp;
+        private System.Windows.Forms.Label labeldispsize;
+        private System.Windows.Forms.NumericUpDown nUDownDispSize;
     }
 }
 
