@@ -50,17 +50,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fq0txU/ea/4TPw9r7ETPwNXsPVDkcUBn115ADpbnRXY=</dsig:DigestValue>
+        <dsig:DigestValue>hKfxlWj9W1dJh7iwbMev4+ZMStUnl4fqEbg7+u1+/WE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="HammerWorldGenerator.exe.config" size="184">
+  <file name="HammerWorldGenerator.exe.config" size="189">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>X+GtgC9o18R9u9jmAWK6iKuu0WLaXTgchdPkk1MRli4=</dsig:DigestValue>
+      <dsig:DigestValue>R+Wg8QGvQVHX8T0ta/qbhH1bXkqY0fRnS3wBV3J0bN8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="HammerWorldGenerator.ico" size="72444">

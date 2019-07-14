@@ -32,6 +32,9 @@ namespace HammerWorldGenerator
 
         readonly int HammerBrushLimit = 1024;
 
+        readonly string HWGVersion = "Alpha";
+        readonly string HWGAuthor = "chesiren & Guthen";
+
         public Frame()
         {
             InitializeComponent();
@@ -164,8 +167,12 @@ namespace HammerWorldGenerator
             string type;
             if (rBut2D.Checked) { type = "2D"; } else if (rBut3D.Checked) { type = "3D"; } else if (rButPerlin3D.Checked) { type = "Perlin 3D"; } else { type = "unknown"; }
             string comment = "/////////////////////////////////////////////////////////////////////////////\r\n" +
-                         "// This .vmf has been created with Hammer World Generator\r\n " +
+                         "// This .vmf has been created with Hammer World Generator\r\n" +
                          "// (https://github.com/Guthen/HammerWorldGenerator).\r\n" +
+                         "//       - Hammer World Generator -\r\n" +
+                         "// Authors            = " + HWGAuthor + "\r\n" +
+                         "// Version            = " + HWGVersion + "\r\n" +
+                         "// \r\n" +
                          "//       - Generator Options -\r\n" +
                          "// Seed               = " + nUDownSeed.Value + "\r\n" +
                          "// Type               = " + type + "\r\n" +
@@ -192,7 +199,7 @@ namespace HammerWorldGenerator
 
             // get the texture size
             _TailleTexture = Decimal.Divide(numericUpDownBlockSize.Value, 128);
-            TailleTexture = _TailleTexture.ToString("0.00").Replace(",", ".");
+            TailleTexture = _TailleTexture.ToString("0.0000").Replace(",", ".");
             Console.WriteLine("TT:" + TailleTexture);
 
             // generation
@@ -652,7 +659,7 @@ namespace HammerWorldGenerator
                     materialfront = "MC/DIRT_SNOWSIDE";
                     materialunder = "MC/DIRT";
                     break;
-                case "snowbloc":
+                case "snow":
                     materialtop = "MC/SNOW";
                     materialright = "MC/SNOW";
                     materialleft = "MC/SNOW";

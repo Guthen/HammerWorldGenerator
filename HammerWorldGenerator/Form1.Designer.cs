@@ -74,6 +74,8 @@
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.coBoxSurface = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.gBoxOptions.SuspendLayout();
             this.gBoxSave.SuspendLayout();
             this.gBoxPerlin.SuspendLayout();
@@ -449,13 +451,15 @@
             // 
             // gBoxMinecraft
             // 
+            this.gBoxMinecraft.Controls.Add(this.label1);
+            this.gBoxMinecraft.Controls.Add(this.coBoxSurface);
             this.gBoxMinecraft.Controls.Add(this.ckBoxFullBreakable);
             this.gBoxMinecraft.Controls.Add(this.labelblocksize);
             this.gBoxMinecraft.Controls.Add(this.numericUpDownBlockSize);
             this.gBoxMinecraft.Controls.Add(this.ckBoxChunkFill);
-            this.gBoxMinecraft.Location = new System.Drawing.Point(13, 353);
+            this.gBoxMinecraft.Location = new System.Drawing.Point(13, 323);
             this.gBoxMinecraft.Name = "gBoxMinecraft";
-            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 90);
+            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 120);
             this.gBoxMinecraft.TabIndex = 7;
             this.gBoxMinecraft.TabStop = false;
             this.gBoxMinecraft.Text = "Minecraft Options";
@@ -463,7 +467,7 @@
             // ckBoxFullBreakable
             // 
             this.ckBoxFullBreakable.AutoSize = true;
-            this.ckBoxFullBreakable.Location = new System.Drawing.Point(89, 50);
+            this.ckBoxFullBreakable.Location = new System.Drawing.Point(89, 97);
             this.ckBoxFullBreakable.Name = "ckBoxFullBreakable";
             this.ckBoxFullBreakable.Size = new System.Drawing.Size(92, 17);
             this.ckBoxFullBreakable.TabIndex = 6;
@@ -494,7 +498,7 @@
             // ckBoxChunkFill
             // 
             this.ckBoxChunkFill.AutoSize = true;
-            this.ckBoxChunkFill.Location = new System.Drawing.Point(6, 51);
+            this.ckBoxChunkFill.Location = new System.Drawing.Point(6, 98);
             this.ckBoxChunkFill.Name = "ckBoxChunkFill";
             this.ckBoxChunkFill.Size = new System.Drawing.Size(74, 17);
             this.ckBoxChunkFill.TabIndex = 4;
@@ -518,7 +522,7 @@
             this.gBoxChunk.Controls.Add(this.nUDownChunkWidth);
             this.gBoxChunk.Location = new System.Drawing.Point(13, 245);
             this.gBoxChunk.Name = "gBoxChunk";
-            this.gBoxChunk.Size = new System.Drawing.Size(187, 102);
+            this.gBoxChunk.Size = new System.Drawing.Size(187, 73);
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
             this.gBoxChunk.Text = "Chunk Options";
@@ -645,6 +649,35 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // coBoxSurface
+            // 
+            this.coBoxSurface.FormattingEnabled = true;
+            this.coBoxSurface.Items.AddRange(new object[] {
+            "Grass",
+            "Dirt",
+            "Stone",
+            "Cobblestone",
+            "Ice",
+            "Snow",
+            "Clay",
+            "Sand",
+            "Glass",
+            "Bedrock"});
+            this.coBoxSurface.Location = new System.Drawing.Point(75, 45);
+            this.coBoxSurface.Name = "coBoxSurface";
+            this.coBoxSurface.Size = new System.Drawing.Size(106, 21);
+            this.coBoxSurface.TabIndex = 21;
+            this.coBoxSurface.Text = "Grass";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Surface :";
+            // 
             // Frame
             // 
             this.AccessibleName = "HammerWorldGenerator";
@@ -735,6 +768,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button ButReset;
         private System.Windows.Forms.Button ButReload;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox coBoxSurface;
     }
 }
 
