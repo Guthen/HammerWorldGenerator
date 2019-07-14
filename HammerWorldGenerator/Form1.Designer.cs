@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frame));
             this.gBoxOptions = new System.Windows.Forms.GroupBox();
+            this.gBoxDisp = new System.Windows.Forms.GroupBox();
+            this.labeldispsize = new System.Windows.Forms.Label();
+            this.nUDownDispSize = new System.Windows.Forms.NumericUpDown();
             this.ButReload = new System.Windows.Forms.Button();
             this.gBoxSave = new System.Windows.Forms.GroupBox();
             this.ButReset = new System.Windows.Forms.Button();
@@ -56,6 +59,8 @@
             this.rBut2D = new System.Windows.Forms.RadioButton();
             this.nUDownSeed = new System.Windows.Forms.NumericUpDown();
             this.gBoxMinecraft = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.coBoxSurface = new System.Windows.Forms.ComboBox();
             this.ckBoxFullBreakable = new System.Windows.Forms.CheckBox();
             this.labelblocksize = new System.Windows.Forms.Label();
             this.numericUpDownBlockSize = new System.Windows.Forms.NumericUpDown();
@@ -74,9 +79,9 @@
             this.OutputTextBox = new System.Windows.Forms.RichTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.coBoxSurface = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.gBoxOptions.SuspendLayout();
+            this.gBoxDisp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownDispSize)).BeginInit();
             this.gBoxSave.SuspendLayout();
             this.gBoxPerlin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownFracGain)).BeginInit();
@@ -94,6 +99,7 @@
             // 
             // gBoxOptions
             // 
+            this.gBoxOptions.Controls.Add(this.gBoxDisp);
             this.gBoxOptions.Controls.Add(this.ButReload);
             this.gBoxOptions.Controls.Add(this.gBoxSave);
             this.gBoxOptions.Controls.Add(this.labelresult);
@@ -114,6 +120,53 @@
             this.gBoxOptions.TabStop = false;
             this.gBoxOptions.Text = "Generator Options";
             // 
+            // gBoxDisp
+            // 
+            this.gBoxDisp.Controls.Add(this.labeldispsize);
+            this.gBoxDisp.Controls.Add(this.nUDownDispSize);
+            this.gBoxDisp.Location = new System.Drawing.Point(13, 243);
+            this.gBoxDisp.Name = "gBoxDisp";
+            this.gBoxDisp.Size = new System.Drawing.Size(254, 90);
+            this.gBoxDisp.TabIndex = 25;
+            this.gBoxDisp.TabStop = false;
+            this.gBoxDisp.Text = "Displacement Options";
+            // 
+            // labeldispsize
+            // 
+            this.labeldispsize.AutoSize = true;
+            this.labeldispsize.Location = new System.Drawing.Point(9, 21);
+            this.labeldispsize.Name = "labeldispsize";
+            this.labeldispsize.Size = new System.Drawing.Size(100, 13);
+            this.labeldispsize.TabIndex = 1;
+            this.labeldispsize.Text = "Displacement Size :";
+            // 
+            // nUDownDispSize
+            // 
+            this.nUDownDispSize.Increment = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Location = new System.Drawing.Point(112, 19);
+            this.nUDownDispSize.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Minimum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nUDownDispSize.Name = "nUDownDispSize";
+            this.nUDownDispSize.Size = new System.Drawing.Size(68, 20);
+            this.nUDownDispSize.TabIndex = 0;
+            this.nUDownDispSize.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
             // ButReload
             // 
             this.ButReload.Location = new System.Drawing.Point(167, 18);
@@ -129,9 +182,9 @@
             this.gBoxSave.Controls.Add(this.ButReset);
             this.gBoxSave.Controls.Add(this.ButLoad);
             this.gBoxSave.Controls.Add(this.ButSave);
-            this.gBoxSave.Location = new System.Drawing.Point(207, 246);
+            this.gBoxSave.Location = new System.Drawing.Point(207, 339);
             this.gBoxSave.Name = "gBoxSave";
-            this.gBoxSave.Size = new System.Drawing.Size(253, 197);
+            this.gBoxSave.Size = new System.Drawing.Size(253, 104);
             this.gBoxSave.TabIndex = 23;
             this.gBoxSave.TabStop = false;
             this.gBoxSave.Text = "Save Options";
@@ -457,12 +510,41 @@
             this.gBoxMinecraft.Controls.Add(this.labelblocksize);
             this.gBoxMinecraft.Controls.Add(this.numericUpDownBlockSize);
             this.gBoxMinecraft.Controls.Add(this.ckBoxChunkFill);
-            this.gBoxMinecraft.Location = new System.Drawing.Point(13, 323);
+            this.gBoxMinecraft.Location = new System.Drawing.Point(273, 243);
             this.gBoxMinecraft.Name = "gBoxMinecraft";
-            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 120);
+            this.gBoxMinecraft.Size = new System.Drawing.Size(187, 90);
             this.gBoxMinecraft.TabIndex = 7;
             this.gBoxMinecraft.TabStop = false;
             this.gBoxMinecraft.Text = "Minecraft Options";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Surface :";
+            // 
+            // coBoxSurface
+            // 
+            this.coBoxSurface.FormattingEnabled = true;
+            this.coBoxSurface.Items.AddRange(new object[] {
+            "Grass",
+            "Dirt",
+            "Stone",
+            "Cobblestone",
+            "Ice",
+            "Snow",
+            "Clay",
+            "Sand",
+            "Glass",
+            "Bedrock"});
+            this.coBoxSurface.Location = new System.Drawing.Point(75, 45);
+            this.coBoxSurface.Name = "coBoxSurface";
+            this.coBoxSurface.Size = new System.Drawing.Size(106, 21);
+            this.coBoxSurface.TabIndex = 21;
+            this.coBoxSurface.Text = "Grass";
             // 
             // ckBoxFullBreakable
             // 
@@ -520,9 +602,9 @@
             this.gBoxChunk.Controls.Add(this.nUDownChunkHeight);
             this.gBoxChunk.Controls.Add(this.labelwidth);
             this.gBoxChunk.Controls.Add(this.nUDownChunkWidth);
-            this.gBoxChunk.Location = new System.Drawing.Point(13, 245);
+            this.gBoxChunk.Location = new System.Drawing.Point(13, 339);
             this.gBoxChunk.Name = "gBoxChunk";
-            this.gBoxChunk.Size = new System.Drawing.Size(187, 73);
+            this.gBoxChunk.Size = new System.Drawing.Size(180, 104);
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
             this.gBoxChunk.Text = "Chunk Options";
@@ -639,8 +721,10 @@
             // 
             // OutputTextBox
             // 
+            this.OutputTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.OutputTextBox.Location = new System.Drawing.Point(496, 93);
             this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.Size = new System.Drawing.Size(409, 362);
             this.OutputTextBox.TabIndex = 2;
             this.OutputTextBox.Text = "";
@@ -648,35 +732,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // coBoxSurface
-            // 
-            this.coBoxSurface.FormattingEnabled = true;
-            this.coBoxSurface.Items.AddRange(new object[] {
-            "Grass",
-            "Dirt",
-            "Stone",
-            "Cobblestone",
-            "Ice",
-            "Snow",
-            "Clay",
-            "Sand",
-            "Glass",
-            "Bedrock"});
-            this.coBoxSurface.Location = new System.Drawing.Point(75, 45);
-            this.coBoxSurface.Name = "coBoxSurface";
-            this.coBoxSurface.Size = new System.Drawing.Size(106, 21);
-            this.coBoxSurface.TabIndex = 21;
-            this.coBoxSurface.Text = "Grass";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Surface :";
             // 
             // Frame
             // 
@@ -698,6 +753,9 @@
             this.Text = "Hammer World Generator";
             this.gBoxOptions.ResumeLayout(false);
             this.gBoxOptions.PerformLayout();
+            this.gBoxDisp.ResumeLayout(false);
+            this.gBoxDisp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUDownDispSize)).EndInit();
             this.gBoxSave.ResumeLayout(false);
             this.gBoxPerlin.ResumeLayout(false);
             this.gBoxPerlin.PerformLayout();
@@ -768,8 +826,14 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button ButReset;
         private System.Windows.Forms.Button ButReload;
+
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox coBoxSurface;
+
+        private System.Windows.Forms.GroupBox gBoxDisp;
+        private System.Windows.Forms.Label labeldispsize;
+        private System.Windows.Forms.NumericUpDown nUDownDispSize;
+
     }
 }
 
