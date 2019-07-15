@@ -162,7 +162,7 @@
             this.nUDownDispSize.Size = new System.Drawing.Size(68, 20);
             this.nUDownDispSize.TabIndex = 0;
             this.nUDownDispSize.Value = new decimal(new int[] {
-            64,
+            512,
             0,
             0,
             0});
