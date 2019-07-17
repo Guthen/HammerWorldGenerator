@@ -494,9 +494,9 @@
             // 
             this.nUDownSeed.Location = new System.Drawing.Point(57, 20);
             this.nUDownSeed.Maximum = new decimal(new int[] {
-            -469762049,
-            -590869294,
-            5421010,
+            2147483647,
+            0,
+            0,
             0});
             this.nUDownSeed.Name = "nUDownSeed";
             this.nUDownSeed.Size = new System.Drawing.Size(104, 20);
