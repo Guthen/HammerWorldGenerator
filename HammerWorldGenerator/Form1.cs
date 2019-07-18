@@ -138,7 +138,7 @@ namespace HammerWorldGenerator
                 ssw.WriteLine(nUDownFracLacunarity.Value);
                 ssw.WriteLine(nUDownFracGain.Value);
                 ssw.WriteLine(nUDownChunkWidth.Value);
-                ssw.WriteLine(nUDownChunkHeight.Value);
+                //ssw.WriteLine(nUDownChunkHeight.Value);
                 ssw.WriteLine(numericUpDownBlockSize.Value);
                 ssw.WriteLine(ckBoxChunkFill.CheckState);
                 ssw.WriteLine(ckBoxFullBreakable.CheckState);
@@ -183,7 +183,7 @@ namespace HammerWorldGenerator
                     nUDownFracLacunarity.Value = Convert.ToDecimal(ssr.ReadLine());
                     nUDownFracGain.Value = Convert.ToDecimal(ssr.ReadLine());
                     nUDownChunkWidth.Value = Convert.ToDecimal(ssr.ReadLine());
-                    nUDownChunkHeight.Value = Convert.ToDecimal(ssr.ReadLine());
+                    //nUDownChunkHeight.Value = Convert.ToDecimal(ssr.ReadLine());
                     numericUpDownBlockSize.Value = Convert.ToDecimal(ssr.ReadLine());
                     if (ssr.ReadLine() == "Checked") { ck = true; } else { ck = false; }
                     ckBoxChunkFill.Checked = ck;
@@ -214,7 +214,7 @@ namespace HammerWorldGenerator
             nUDownFracLacunarity.Value = 2.00m;
             nUDownFracGain.Value = 0.50m;
             nUDownChunkWidth.Value = 32;
-            nUDownChunkHeight.Value = 32;
+            //nUDownChunkHeight.Value = 32;
             numericUpDownBlockSize.Value = 40m;
             ckBoxChunkFill.Checked = false;
             ckBoxFullBreakable.Checked = false;
@@ -252,9 +252,9 @@ namespace HammerWorldGenerator
                          "// Fractal Lacunarity = " + nUDownFracLacunarity.Value + "\r\n" +
                          "// Fractal Gain       = " + nUDownFracGain.Value + "\r\n" +
                          "// \r\n" +
-                         "//       - Chunk Options -\r\n" +
+                         "//       - World Options -\r\n" +
                          "// Width              = " + nUDownChunkWidth.Value + "\r\n" +
-                         "// Height             = " + nUDownChunkHeight.Value + "\r\n" +
+                         //"// Height             = " + nUDownChunkHeight.Value + "\r\n" +
                          "// \r\n" +
                          "//       - Minecraft Options -\r\n" +
                          "// Block Size         = " + numericUpDownBlockSize.Value + "\r\n" +
@@ -295,7 +295,7 @@ namespace HammerWorldGenerator
                         }
                     }
 
-                    var world = Generate2DWorld(Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(numericUpDownBlockSize.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3);
+                    var world = Generate2DWorld(Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(numericUpDownBlockSize.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value), 32, 15, 30, 3);
                     Convert2DWorldToVmf(world, breakable);
                 }
                 else
@@ -308,7 +308,7 @@ namespace HammerWorldGenerator
             }
             else if (rBut3D.Checked) // 3d stuff
             {
-                var world = Generate3DWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 1, Convert.ToInt32( nUDownChunkWidth.Value ), Convert.ToInt32( nUDownChunkHeight.Value ), 15, 30, 3 );
+                var world = Generate3DWorld( Convert.ToInt32( nUDownSeed.Value ), Convert.ToInt32( numericUpDownBlockSize.Value ), 1, Convert.ToInt32( nUDownChunkWidth.Value ), 32, 15, 30, 3 );
                 Convert3DWorldToVmf(world, breakable);
             }
             else
@@ -328,25 +328,12 @@ namespace HammerWorldGenerator
                         }
                     }
 
-                    var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
+                    var hMap = GeneratePerlin3DWorld(true, Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
                     ConvertPerlin3DWorldToVmf(hMap, breakable);
                 }
                 else if (coBoxResult.Text == "Displacement")
                 {
-                    var w = Convert.ToInt32(nUDownChunkWidth.Value);
-                    if (w * w > HammerBrushLimit)
-                    {
-                        var result = MessageBox.Show(this, "Attention, la limite de brush sera dépassée (" + HammerBrushLimit + ") si vous générez " + w * w + " brushs ! Souhaitez-vous continuer ?",
-                                      "Warning", MessageBoxButtons.YesNo,
-                                      MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-
-                        if (result == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-
-                    var hMap = GeneratePerlin3DWorld(Convert.ToInt32(nUDownSeed.Value), 1, Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
+                    var hMap = GeneratePerlin3DWorld(false, Convert.ToInt32(nUDownSeed.Value), Convert.ToInt32(nUDownChunkWidth.Value)); //, Convert.ToInt32(nUDownChunkHeight.Value), 15, 30, 3); ->  marqué comme inutilisé, à supprimer ou utiliser
                     ConvertDispPerlin3DWorldToVmf(hMap);
                 }
 
@@ -391,7 +378,7 @@ namespace HammerWorldGenerator
             return world;
         }
 
-        private float[][] GeneratePerlin3DWorld(int seed, int nChunks, int chunkW) //, int chunkH, int y, int minY, int maxY) ->  marqué comme inutilisé, à supprimer ou utiliser
+        private float[][] GeneratePerlin3DWorld(bool isMinecraft, int seed, int chunkW) //, int chunkH, int y, int minY, int maxY) ->  marqué comme inutilisé, à supprimer ou utiliser
         {
             FastNoise myNoise = new FastNoise(); // Create a FastNoise object
                 myNoise.SetSeed(seed);
@@ -447,11 +434,22 @@ namespace HammerWorldGenerator
                     break;
             }
 
-            float[][] heightMap = new float[chunkW*nChunks][]; // 2D heightmap to create terrain
-            for (int _x = 0; _x < chunkW * nChunks; _x++)
+            int size = chunkW;
+            if (!isMinecraft)
             {
-                heightMap[_x] = new float[chunkW*nChunks];
-                for (int _y = 0; _y < chunkW * nChunks; _y++)
+                if (chunkW % Convert.ToInt32(nUDownDispSize.Value) == 0)
+                {
+                    size = 9 * chunkW / Convert.ToInt32(nUDownDispSize.Value);
+                }
+            }
+
+            Console.WriteLine("Size : " + size);
+
+            float[][] heightMap = new float[size][]; // 2D heightmap to create terrain
+            for (int _x = 0; _x < size; _x++)
+            {
+                heightMap[_x] = new float[size];
+                for (int _y = 0; _y < size; _y++)
                 {
                     heightMap[_x][_y] = myNoise.GetNoise(_x, _y);
                 }
@@ -655,41 +653,40 @@ namespace HammerWorldGenerator
                 save += "}\r\n";
             }
 
-            var i = 0;
-            var max = world.Length * world[0].Length;
-            
+            var s = nUDownDispSize.Value;
+            var size = new decimal[3] { s, s, s };
+            //var max = world.Length * world[0].Length;
 
-            int[][] zPos;
+            float[][] zPos = new float[9][];
 
             Console.WriteLine("BlocType: " + bloctype);
 
             string output = "world = {\n";
-            for (int x = 0; x < world.Length; x++)
+            for ( int u = 0; u <= Math.Round(s / nUDownDispSize.Value); u++ )
             {
-                output += "\t\t[" + x + "] = { ";
-                for (int y = 0; y < world[x].Length; y++)
+                for (int x = 0; x < 9; x++)
                 {
-                    var p = Math.Round( Convert.ToDouble( i / (max) * 100 ) );
-                    pBarFinish.Value = Convert.ToInt32( p );
+                    zPos[x] = new float[9];
 
-                    Console.WriteLine("i: " + i + " #w*#w: " + world.Length * world[x].Length + " p: " + p);
+                    output += "\t\t[" + x + "] = { ";
+                    for (int y = 0; y < 9; y++)
+                    {
+                        //var p = Math.Round( Convert.ToDouble( i / (max) * 100 ) );
+                        //pBarFinish.Value = Convert.ToInt32( p );
 
-                    var z = world[x][y] * 10;
-                    output += z + ", ";
+                        //Console.WriteLine("i: " + i + " #w*#w: " + world.Length * world[x].Length + " p: " + p);
 
-                    // get position & size
-                    var s = nUDownDispSize.Value;
-                    var position = new decimal[3] { x * s, y * s, Convert.ToDecimal(z) };
-                    var size = new decimal[3] { s, s, s };
+                        var z = world[x][y] * 200;
+                        zPos[x][y] = z;
 
-                    //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
-
-                    i++;
+                        output += z + ", ";
+                        //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
+                    }
+                    output += " },\n";
                 }
-                output += " },\n";
-                i++;
+                var position = new decimal[3] { u * s, u * s, -s - 64 };
+                CreateDisp(position, size, zPos[0], zPos[1], zPos[2], zPos[3], zPos[4], zPos[5], zPos[6], zPos[7], zPos[8]);
             }
-            CreateDisp(position, size, zPos[0], zPos[1], zPos[2], zPos[3], zPos[4], zPos[5], zPos[6], zPos[7], zPos[8]);
 
             output += "\t},\n";
             output += "}";
@@ -702,7 +699,15 @@ namespace HammerWorldGenerator
             }
         }
 
-        private void CreateDisp(decimal[] posVec, decimal[] sizeVec, int[] zA, int[] zB, int[] zC, int[] zD, int[] zE, int[] zF, int[] zG, int[] zH, int[] zI)
+        private int Norm( float n )
+        {
+            if (n < 0) return -1;
+            if (n > 0) return 1;
+
+            return 0;
+        }
+
+        private void CreateDisp(decimal[] posVec, decimal[] sizeVec, float[] zA, float[] zB, float[] zC, float[] zD, float[] zE, float[] zF, float[] zG, float[] zH, float[] zI)
         {
             decimal x = posVec[0]; //
             decimal y = posVec[1]; // positions
@@ -712,7 +717,9 @@ namespace HammerWorldGenerator
             decimal ys = y + sizeVec[1]; // size positions
             string zs = (posVec[2] + sizeVec[2]).ToString().Replace(",","."); //
 
-            disp = string.Format(dispbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}", zA[0], zA[1], zA[2], zA[3], zA[4], zA[5], zA[6], zA[7], zA[8], zB[0], zB[1], zB[2], zB[3], zB[4], zB[5], zB[6], zB[7], zB[8], zC[0], zC[1], zC[2], zC[3], zC[4], zC[5], zC[6], zC[7], zC[8], zD[0], zD[1], zD[2], zD[3], zD[4], zD[5], zD[6], zD[7], zD[8], zE[0], zE[1], zE[2], zE[3], zE[4], zE[5], zE[6], zE[7], zE[8], zF[0], zF[1], zF[2], zF[3], zF[4], zF[5], zF[6], zF[7], zF[8], zG[0], zG[1], zG[2], zG[3], zG[4], zG[5], zG[6], zG[7], zG[8], zH[0], zH[1], zH[2], zH[3], zH[4], zH[5], zH[6], zH[7], zH[8], zI[0], zI[1], zI[2], zI[3], zI[4], zI[5], zI[6], zI[7], zI[8] );
+            disp = string.Format(dispbase, solidid++, planeid++, x, y, z, xs, ys, zs, TailleTexture, materialtop, materialunder, materialfront, materialright, materialleft, materialbehind, "{", "}", 
+                            Norm(zA[0]), Norm(zA[1]), Norm(zA[2]), Norm(zA[3]), Norm(zA[4]), Norm(zA[5]), Norm(zA[6]), Norm(zA[7]), Norm(zA[8]), Norm(zB[0]), Norm(zB[1]), Norm(zB[2]), Norm(zB[3]), Norm(zB[4]), Norm(zB[5]), Norm(zB[6]), Norm(zB[7]), Norm(zB[8]), Norm(zC[0]), Norm(zC[1]), Norm(zC[2]), Norm(zC[3]), Norm(zC[4]), Norm(zC[5]), Norm(zC[6]), Norm(zC[7]), Norm(zC[8]), Norm(zD[0]), Norm(zD[1]), Norm(zD[2]), Norm(zD[3]), Norm(zD[4]), Norm(zD[5]), Norm(zD[6]), Norm(zD[7]), Norm(zD[8]), Norm(zE[0]), Norm(zE[1]), Norm(zE[2]), Norm(zE[3]), Norm(zE[4]), Norm(zE[5]), Norm(zE[6]), Norm(zE[7]), Norm(zE[8]), Norm(zF[0]), Norm(zF[1]), Norm(zF[2]), Norm(zF[3]), Norm(zF[4]), Norm(zF[5]), Norm(zF[6]), Norm(zF[7]), Norm(zF[8]), Norm(zG[0]), Norm(zG[1]), Norm(zG[2]), Norm(zG[3]), Norm(zG[4]), Norm(zG[5]), Norm(zG[6]), Norm(zG[7]), Norm(zG[8]), Norm(zH[0]), Norm(zH[1]), Norm(zH[2]), Norm(zH[3]), Norm(zH[4]), Norm(zH[5]), Norm(zH[6]), Norm(zH[7]), Norm(zH[8]), Norm(zI[0]), Norm(zI[1]), Norm(zI[2]), Norm(zI[3]), Norm(zI[4]), Norm(zI[5]), Norm(zI[6]), Norm(zI[7]), Norm(zI[8]),
+                            zA[0].ToString().Replace(",","."), zA[1].ToString().Replace(",","."), zA[2].ToString().Replace(",","."), zA[3].ToString().Replace(",","."), zA[4].ToString().Replace(",","."), zA[5].ToString().Replace(",","."), zA[6].ToString().Replace(",","."), zA[7].ToString().Replace(",","."), zA[8].ToString().Replace(",","."), zB[0].ToString().Replace(",","."), zB[1].ToString().Replace(",","."), zB[2].ToString().Replace(",","."), zB[3].ToString().Replace(",","."), zB[4].ToString().Replace(",","."), zB[5].ToString().Replace(",","."), zB[6].ToString().Replace(",","."), zB[7].ToString().Replace(",","."), zB[8].ToString().Replace(",","."), zC[0].ToString().Replace(",","."), zC[1].ToString().Replace(",","."), zC[2].ToString().Replace(",","."), zC[3].ToString().Replace(",","."), zC[4].ToString().Replace(",","."), zC[5].ToString().Replace(",","."), zC[6].ToString().Replace(",","."), zC[7].ToString().Replace(",","."), zC[8].ToString().Replace(",","."), zD[0].ToString().Replace(",","."), zD[1].ToString().Replace(",","."), zD[2].ToString().Replace(",","."), zD[3].ToString().Replace(",","."), zD[4].ToString().Replace(",","."), zD[5].ToString().Replace(",","."), zD[6].ToString().Replace(",","."), zD[7].ToString().Replace(",","."), zD[8].ToString().Replace(",","."), zE[0].ToString().Replace(",","."), zE[1].ToString().Replace(",","."), zE[2].ToString().Replace(",","."), zE[3].ToString().Replace(",","."), zE[4].ToString().Replace(",","."), zE[5].ToString().Replace(",","."), zE[6].ToString().Replace(",","."), zE[7].ToString().Replace(",","."), zE[8].ToString().Replace(",","."), zF[0].ToString().Replace(",","."), zF[1].ToString().Replace(",","."), zF[2].ToString().Replace(",","."), zF[3].ToString().Replace(",","."), zF[4].ToString().Replace(",","."), zF[5].ToString().Replace(",","."), zF[6].ToString().Replace(",","."), zF[7].ToString().Replace(",","."), zF[8].ToString().Replace(",","."), zG[0].ToString().Replace(",","."), zG[1].ToString().Replace(",","."), zG[2].ToString().Replace(",","."), zG[3].ToString().Replace(",","."), zG[4].ToString().Replace(",","."), zG[5].ToString().Replace(",","."), zG[6].ToString().Replace(",","."), zG[7].ToString().Replace(",","."), zG[8].ToString().Replace(",","."), zH[0].ToString().Replace(",","."), zH[1].ToString().Replace(",","."), zH[2].ToString().Replace(",","."), zH[3].ToString().Replace(",","."), zH[4].ToString().Replace(",","."), zH[5].ToString().Replace(",","."), zH[6].ToString().Replace(",","."), zH[7].ToString().Replace(",","."), zH[8].ToString().Replace(",","."), zI[0].ToString().Replace(",","."), zI[1].ToString().Replace(",","."), zI[2].ToString().Replace(",","."), zI[3].ToString().Replace(",","."), zI[4].ToString().Replace(",","."), zI[5].ToString().Replace(",","."), zI[6].ToString().Replace(",","."), zI[7].ToString().Replace(",","."), zI[8].ToString().Replace(",",".") );
             
             save += disp;
         }
@@ -860,6 +867,11 @@ namespace HammerWorldGenerator
             {
                 materialunder = "TOOLS/TOOLSNODRAW";
             }
+        }
+
+        private void NUDownChunkWidth_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

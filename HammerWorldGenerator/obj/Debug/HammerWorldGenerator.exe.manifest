@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HammerWorldGenerator.exe" size="246240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="HammerWorldGenerator.exe" size="250848">
       <assemblyIdentity name="HammerWorldGenerator" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>EMV19qAFnmkeRjnUZeJjuq/UOh3NrJWO5iA9qQY4mro=</dsig:DigestValue>
+        <dsig:DigestValue>ffjwzYTp6hqz9uN8wBAG84iNZr7iLblg2Tou4Id4L2A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

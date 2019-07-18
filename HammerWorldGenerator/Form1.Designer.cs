@@ -67,8 +67,6 @@
             this.ckBoxChunkFill = new System.Windows.Forms.CheckBox();
             this.labelseed = new System.Windows.Forms.Label();
             this.gBoxChunk = new System.Windows.Forms.GroupBox();
-            this.labelheight = new System.Windows.Forms.Label();
-            this.nUDownChunkHeight = new System.Windows.Forms.NumericUpDown();
             this.labelwidth = new System.Windows.Forms.Label();
             this.nUDownChunkWidth = new System.Windows.Forms.NumericUpDown();
             this.labeloutput = new System.Windows.Forms.Label();
@@ -92,7 +90,6 @@
             this.gBoxMinecraft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).BeginInit();
             this.gBoxChunk.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).BeginInit();
             this.gBoxOutput.SuspendLayout();
             this.SuspendLayout();
@@ -134,7 +131,7 @@
             // labeldispsize
             // 
             this.labeldispsize.AutoSize = true;
-            this.labeldispsize.Location = new System.Drawing.Point(9, 21);
+            this.labeldispsize.Location = new System.Drawing.Point(37, 26);
             this.labeldispsize.Name = "labeldispsize";
             this.labeldispsize.Size = new System.Drawing.Size(100, 13);
             this.labeldispsize.TabIndex = 1;
@@ -147,7 +144,7 @@
             0,
             0,
             0});
-            this.nUDownDispSize.Location = new System.Drawing.Point(112, 19);
+            this.nUDownDispSize.Location = new System.Drawing.Point(140, 24);
             this.nUDownDispSize.Maximum = new decimal(new int[] {
             1024,
             0,
@@ -191,7 +188,7 @@
             // 
             // ButReset
             // 
-            this.ButReset.Location = new System.Drawing.Point(10, 77);
+            this.ButReset.Location = new System.Drawing.Point(55, 76);
             this.ButReset.Name = "ButReset";
             this.ButReset.Size = new System.Drawing.Size(139, 23);
             this.ButReset.TabIndex = 2;
@@ -201,7 +198,7 @@
             // 
             // ButLoad
             // 
-            this.ButLoad.Location = new System.Drawing.Point(10, 49);
+            this.ButLoad.Location = new System.Drawing.Point(55, 48);
             this.ButLoad.Name = "ButLoad";
             this.ButLoad.Size = new System.Drawing.Size(139, 23);
             this.ButLoad.TabIndex = 1;
@@ -211,7 +208,7 @@
             // 
             // ButSave
             // 
-            this.ButSave.Location = new System.Drawing.Point(10, 20);
+            this.ButSave.Location = new System.Drawing.Point(55, 19);
             this.ButSave.Name = "ButSave";
             this.ButSave.Size = new System.Drawing.Size(139, 23);
             this.ButSave.TabIndex = 0;
@@ -520,7 +517,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 48);
+            this.label1.Location = new System.Drawing.Point(19, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 22;
@@ -540,7 +537,7 @@
             "Sand",
             "Glass",
             "Bedrock"});
-            this.coBoxSurface.Location = new System.Drawing.Point(75, 45);
+            this.coBoxSurface.Location = new System.Drawing.Point(75, 54);
             this.coBoxSurface.Name = "coBoxSurface";
             this.coBoxSurface.Size = new System.Drawing.Size(106, 21);
             this.coBoxSurface.TabIndex = 21;
@@ -559,7 +556,7 @@
             // labelblocksize
             // 
             this.labelblocksize.AutoSize = true;
-            this.labelblocksize.Location = new System.Drawing.Point(6, 22);
+            this.labelblocksize.Location = new System.Drawing.Point(6, 24);
             this.labelblocksize.Name = "labelblocksize";
             this.labelblocksize.Size = new System.Drawing.Size(63, 13);
             this.labelblocksize.TabIndex = 5;
@@ -567,7 +564,7 @@
             // 
             // numericUpDownBlockSize
             // 
-            this.numericUpDownBlockSize.Location = new System.Drawing.Point(75, 19);
+            this.numericUpDownBlockSize.Location = new System.Drawing.Point(75, 21);
             this.numericUpDownBlockSize.Name = "numericUpDownBlockSize";
             this.numericUpDownBlockSize.Size = new System.Drawing.Size(68, 20);
             this.numericUpDownBlockSize.TabIndex = 4;
@@ -598,8 +595,6 @@
             // 
             // gBoxChunk
             // 
-            this.gBoxChunk.Controls.Add(this.labelheight);
-            this.gBoxChunk.Controls.Add(this.nUDownChunkHeight);
             this.gBoxChunk.Controls.Add(this.labelwidth);
             this.gBoxChunk.Controls.Add(this.nUDownChunkWidth);
             this.gBoxChunk.Location = new System.Drawing.Point(13, 339);
@@ -607,51 +602,20 @@
             this.gBoxChunk.Size = new System.Drawing.Size(180, 104);
             this.gBoxChunk.TabIndex = 2;
             this.gBoxChunk.TabStop = false;
-            this.gBoxChunk.Text = "Chunk Options";
-            // 
-            // labelheight
-            // 
-            this.labelheight.AutoSize = true;
-            this.labelheight.Location = new System.Drawing.Point(6, 47);
-            this.labelheight.Name = "labelheight";
-            this.labelheight.Size = new System.Drawing.Size(44, 13);
-            this.labelheight.TabIndex = 3;
-            this.labelheight.Text = "Height :";
-            // 
-            // nUDownChunkHeight
-            // 
-            this.nUDownChunkHeight.Location = new System.Drawing.Point(53, 45);
-            this.nUDownChunkHeight.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.nUDownChunkHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nUDownChunkHeight.Name = "nUDownChunkHeight";
-            this.nUDownChunkHeight.Size = new System.Drawing.Size(58, 20);
-            this.nUDownChunkHeight.TabIndex = 2;
-            this.nUDownChunkHeight.Value = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
+            this.gBoxChunk.Text = "World Options";
             // 
             // labelwidth
             // 
             this.labelwidth.AutoSize = true;
             this.labelwidth.Location = new System.Drawing.Point(9, 21);
             this.labelwidth.Name = "labelwidth";
-            this.labelwidth.Size = new System.Drawing.Size(41, 13);
+            this.labelwidth.Size = new System.Drawing.Size(72, 13);
             this.labelwidth.TabIndex = 1;
-            this.labelwidth.Text = "Width :";
+            this.labelwidth.Text = "World Width :";
             // 
             // nUDownChunkWidth
             // 
-            this.nUDownChunkWidth.Location = new System.Drawing.Point(53, 19);
+            this.nUDownChunkWidth.Location = new System.Drawing.Point(87, 19);
             this.nUDownChunkWidth.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -663,13 +627,14 @@
             0,
             0});
             this.nUDownChunkWidth.Name = "nUDownChunkWidth";
-            this.nUDownChunkWidth.Size = new System.Drawing.Size(58, 20);
+            this.nUDownChunkWidth.Size = new System.Drawing.Size(78, 20);
             this.nUDownChunkWidth.TabIndex = 0;
             this.nUDownChunkWidth.Value = new decimal(new int[] {
-            32,
+            512,
             0,
             0,
             0});
+            this.nUDownChunkWidth.ValueChanged += new System.EventHandler(this.NUDownChunkWidth_ValueChanged);
             // 
             // labeloutput
             // 
@@ -769,7 +734,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBlockSize)).EndInit();
             this.gBoxChunk.ResumeLayout(false);
             this.gBoxChunk.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDownChunkWidth)).EndInit();
             this.gBoxOutput.ResumeLayout(false);
             this.gBoxOutput.PerformLayout();
@@ -784,8 +748,6 @@
         private System.Windows.Forms.GroupBox gBoxOutput;
         private System.Windows.Forms.GroupBox gBoxChunk;
         private System.Windows.Forms.CheckBox ckBoxChunkFill;
-        private System.Windows.Forms.Label labelheight;
-        private System.Windows.Forms.NumericUpDown nUDownChunkHeight;
         private System.Windows.Forms.Label labelwidth;
         private System.Windows.Forms.NumericUpDown nUDownChunkWidth;
         private System.Windows.Forms.Label labelseed;
