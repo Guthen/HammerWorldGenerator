@@ -654,38 +654,44 @@ namespace HammerWorldGenerator
             }
 
             var s = nUDownDispSize.Value;
+            var disps = Math.Round( nUDownChunkWidth.Value / s );
             var size = new decimal[3] { s, s, s };
             //var max = world.Length * world[0].Length;
 
             float[][] zPos = new float[9][];
 
             Console.WriteLine("BlocType: " + bloctype);
+            Console.WriteLine("Displacements: " + disps);
+            Console.WriteLine("DispSize/WorldWidth: " + nUDownChunkWidth.Value + "/" + s + " = " + disps);
 
             string output = "world = {\n";
-            for ( int u = 0; u <= Math.Round(s / nUDownDispSize.Value); u++ )
+            for (int ux = 0; ux < disps; ux++)
             {
-                for (int x = 0; x < 9; x++)
+                for (int uy = 0; uy < disps; uy++)
                 {
-                    zPos[x] = new float[9];
-
-                    output += "\t\t[" + x + "] = { ";
                     for (int y = 0; y < 9; y++)
                     {
-                        //var p = Math.Round( Convert.ToDouble( i / (max) * 100 ) );
-                        //pBarFinish.Value = Convert.ToInt32( p );
+                        zPos[y] = new float[9];
 
-                        //Console.WriteLine("i: " + i + " #w*#w: " + world.Length * world[x].Length + " p: " + p);
+                        output += "\t\t[" + y + "] = { ";
+                        for (int x = 0; x < 9; x++)
+                        {
+                            //var p = Math.Round( Convert.ToDouble( i / (max) * 100 ) );
+                            //pBarFinish.Value = Convert.ToInt32( p );
 
-                        var z = world[x][y] * 200;
-                        zPos[x][y] = z;
+                            //Console.WriteLine("i: " + i + " #w*#w: " + world.Length * world[x].Length + " p: " + p);
 
-                        output += z + ", ";
-                        //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
+                            var z = world[y][x] * 200;
+                            zPos[y][x] = z;
+
+                            output += z + ", ";
+                            //Console.WriteLine("x:" + position[0] + " y:" + position[1] + " z:" + position[2]);
+                        }
+                        output += " },\n";
                     }
-                    output += " },\n";
+                    var position = new decimal[3] { ux * s, uy * s, -s - 64 };
+                    CreateDisp(position, size, zPos[0], zPos[1], zPos[2], zPos[3], zPos[4], zPos[5], zPos[6], zPos[7], zPos[8]);
                 }
-                var position = new decimal[3] { u * s, u * s, -s - 64 };
-                CreateDisp(position, size, zPos[0], zPos[1], zPos[2], zPos[3], zPos[4], zPos[5], zPos[6], zPos[7], zPos[8]);
             }
 
             output += "\t},\n";
